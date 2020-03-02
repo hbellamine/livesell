@@ -1,8 +1,10 @@
 class SessionsController < ApplicationController
   def index
+    @sessions = Session.All
   end
 
   def new
+    @session = Session.new
   end
 
   def create

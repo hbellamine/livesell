@@ -1,6 +1,8 @@
 .navbar-lewagon {
   justify-content: space-between;
   background: white;
+  padding-top: 0px;
+  background: #a0b2a6;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -8,5 +10,37 @@
 }
 
 .navbar-lewagon .navbar-brand img {
-  width: 40px;
+  width: 50px;
 }
+
+.navbar-lewagon .nav-link {
+  margin-right: 20px;
+  font-size: 20px;
+  color: #493843;
+}
+
+// .navbar-lewagon .dropdown-toggle {
+//   cursor: pointer;
+// }
+
+// .dropdown-item a {
+//   text-decoration: none;
+//   color:rgb(107, 61, 183);
+//   font-family: 'Poppins';
+
+// }
+
+// .dropdown-toggle:empty::after {
+//     margin-left: 0;
+// }
+
+// .dropdown-toggle::after {
+//     display: inline-block;
+//     margin-left: 0.255em;
+//     vertical-align: 0.255em;
+//     content: "";
+//     border-top: 0.3em solid;
+//     border-right: 0.3em solid transparent;
+//     border-bottom: 0;
+//     border-left: 0.3em solid transparent;
+// }

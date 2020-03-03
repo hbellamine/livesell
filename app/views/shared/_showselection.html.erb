@@ -1,0 +1,8 @@
+
+<% @selection = Selection.where(livecast_id: params[:livecast]) %>
+
+    <% @selection.each do |selection| %>
+    <% product = Product.find(selection.product_id)%>
+    <%= product.description %><br>
+    <%= product.price %><br>
+<%end%>

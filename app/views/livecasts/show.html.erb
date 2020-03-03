@@ -1,0 +1,31 @@
+
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v6.0&appId=1307859595905955&autoLogAppEvents=1"></script>
+<div class="showpage">
+ <div class="live">
+    <div class="cast">
+    <% livecast = Livecast.find(params[:id])%>
+      <div class="fb-video" data-href="<%= livecast.url %>" data-width="300" data-show-text="false">
+        <blockquote cite="https://developers.facebook.com/facebookapp/videos/10153231379946729/" class="fb-xfbml-parse-ignore"><a href="https://developers.facebook.com/facebookapp/videos/10153231379946729/">
+        How to Share With Just Friends</a><p>How to share with just friends.</p>
+        Publiée par <a href="https://www.facebook.com/facebookapp/">Facebook App</a>
+      sur Vendredi 5 décembre 2014</blockquote></div>
+    </div>
+ <!--  if it is a seller profile  -->
+    <div class="livereporting">
+    </div>
+  <!-- if it is a buyer profil -->
+    <div class="nowproduct">
+    </div>
+  </div>
+
+  <div class="nextproducts">
+  </div>
+
+
+
+<% @selection.each do |selection| %>
+    <% @product = Product.find(selection.product_id) %>
+    <%= @product.description %>
+    <%= @product.price %>
+<%end%>

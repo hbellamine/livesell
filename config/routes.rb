@@ -1,32 +1,28 @@
 Rails.application.routes.draw do
-  # get 'orders/index'
-  # get 'orders/new'
-  # get 'orders/create'
-  # get 'orders/edit'
-  # get 'orders/update'
-  # get 'orders/destroy'
-  # get 'products/index'
-  # get 'products/new'
-  # get 'products/create'
-  # get 'products/edit'
-  # get 'products/update'
-  # get 'products/destroy'
-  # get 'sessions/index'
-  # get 'sessions/new'
-  # get 'sessions/create'
-  # get 'sessions/edit'
-  # get 'sessions/update'
-  # get 'sessions/destroy'
-  devise_for :users
+
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    sessions: 'users/sessions'
+  }
+
   root to: 'pages#home'
 
+  resources :stores, only: [:edit, :update]
 
-
-  resources :users
+  resources :stores, only: [:index,:new,:create,:show] do
+    resources :products, only:[:new, :create,:edit, :update, :show, :destroy]
+  end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  resources :sessions, only:[:index, :new, :create, :edit, :show, :update]
+  resources :livecasts do
+    resources :products, only:[:show] do
+      get 'livecast_selection', to: 'selections#add' , as: 'selection'
+      resources :selections
+    end
+
+  end
+  get 'my_livecasts', to: 'livecasts#mylivecasts' , as: 'usermylivecasts'
 end
 
 

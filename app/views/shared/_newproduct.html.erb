@@ -1,5 +1,5 @@
 <div class="creatproduct">
-    <%= simple_form_for [@store,@product] do |f| %>
+    <%= simple_form_for(@store) do |f| %>
 
         <%= image_tag("https://res.cloudinary.com/dnwnxu6xb/image/upload/v1583168428/young-asia-happy-lady-live-video-blog-vlogger-sales-clothes-online-e-commerce-shopping-shop_53255-543_eracxy.jpg") %>
         <%= f.input :pictures, as: :file %>
@@ -11,6 +11,3 @@
         <%=f.submit%>
   <%end%>
 </div>
-
-
-

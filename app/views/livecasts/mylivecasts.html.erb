@@ -1,0 +1,33 @@
+
+ <% @livecasts.each do |livecast| %>
+    <div class="card-product">
+      <%= cl_image_tag livecast.picture.attachment.key, height: 300, width: 400, crop: :fill, class: "img-rounded" %>
+
+      <div class="card-product-infos">
+        <h3><%= livecast.title %></h3>
+        <h2 style="font-size: 16px;">From: <%= livecast.date %></h2>
+        <h2>At: <%= livecast.start_time %><h2>
+        <h2>N°-Selected products: <h2 style="color:red;"><%#= Selection.where(livecast: livecast).count %></h2>
+      </div>
+
+      <div>
+        <%= simple_form_for (livecast) do |f| %>
+        <%= f.input :url %>
+        <%=f.submit%>
+        <%end%>
+      </div>
+
+      <div class="confirm-button">
+      <% livecast.store_id = @store.id %>
+
+          <%= link_to "Add products to this livecast", store_path(livecast.store,livecast: livecast.id) ,class: "btn btn-danger" %>
+          <%= link_to livecast_path(livecast.id), method: :delete do%>
+            <h1>Delete</h1>
+        <%end%>
+         <%= link_to "Go live",livecast_path(livecast.id) %>
+      </div>
+
+      </div>
+<%end%>
+
+

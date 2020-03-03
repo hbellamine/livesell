@@ -1,33 +1,38 @@
 require 'test_helper'
 
-class SessionsControllerTest < ActionDispatch::IntegrationTest
+class LivecastsControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
-    get sessions_index_url
+    get livecasts_index_url
     assert_response :success
   end
 
   test "should get new" do
-    get sessions_new_url
+    get livecasts_new_url
     assert_response :success
   end
 
   test "should get create" do
-    get sessions_create_url
+    get livecasts_create_url
+    assert_response :success
+  end
+
+  test "should get show" do
+    get livecasts_show_url
     assert_response :success
   end
 
   test "should get edit" do
-    get sessions_edit_url
+    get livecasts_edit_url
     assert_response :success
   end
 
   test "should get update" do
-    get sessions_update_url
+    get livecasts_update_url
     assert_response :success
   end
 
   test "should get destroy" do
-    get sessions_destroy_url
+    get livecasts_destroy_url
     assert_response :success
   end
 

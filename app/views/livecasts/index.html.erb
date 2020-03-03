@@ -1,0 +1,12 @@
+
+<% @livecasts.each do |livecast| %>
+ <% if livecast.confirmed? %>
+    <div class="card-product">
+      <%= cl_image_tag livecast.picture.key, height: 300, width: 400, crop: :fill %>
+      <div class="card-product-infos">
+        <h2><%= livecast.title %> | <%= livecast.date %> | <%=livecast.starttime %> </h2>
+        <p><%= livecast.productscategory %> </p>
+      </div>
+    </div>
+    <%end%>
+<%end%>

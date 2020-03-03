@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_02_164402) do
+ActiveRecord::Schema.define(version: 2020_03_04_162629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
 
   create_table "buyings", force: :cascade do |t|
     t.bigint "order_id"
@@ -22,6 +43,23 @@ ActiveRecord::Schema.define(version: 2020_03_02_164402) do
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_buyings_on_order_id"
     t.index ["product_id"], name: "index_buyings_on_product_id"
+  end
+
+  create_table "livecasts", force: :cascade do |t|
+    t.string "category"
+    t.integer "state", default: 0
+    t.bigint "user_id"
+    t.bigint "store_id"
+    t.string "url"
+    t.string "picture"
+    t.string "title"
+    t.date "date"
+    t.datetime "start_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "mode", default: 0
+    t.index ["store_id"], name: "index_livecasts_on_store_id"
+    t.index ["user_id"], name: "index_livecasts_on_user_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -41,28 +79,18 @@ ActiveRecord::Schema.define(version: 2020_03_02_164402) do
     t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "pictures"
+    t.string "description"
     t.index ["store_id"], name: "index_products_on_store_id"
   end
 
   create_table "selections", force: :cascade do |t|
     t.bigint "product_id"
-    t.bigint "session_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "livecast_id"
+    t.index ["livecast_id"], name: "index_selections_on_livecast_id"
     t.index ["product_id"], name: "index_selections_on_product_id"
-    t.index ["session_id"], name: "index_selections_on_session_id"
-  end
-
-  create_table "sessions", force: :cascade do |t|
-    t.string "date"
-    t.string "productscategory"
-    t.string "state"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "url"
-    t.string "photo"
-    t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
   create_table "stores", force: :cascade do |t|
@@ -80,16 +108,19 @@ ActiveRecord::Schema.define(version: 2020_03_02_164402) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "type"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "buyings", "orders"
   add_foreign_key "buyings", "products"
+  add_foreign_key "livecasts", "stores"
+  add_foreign_key "livecasts", "users"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "stores"
+  add_foreign_key "selections", "livecasts"
   add_foreign_key "selections", "products"
-  add_foreign_key "selections", "sessions"
-  add_foreign_key "sessions", "users"
   add_foreign_key "stores", "users"
 end

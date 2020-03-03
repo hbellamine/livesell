@@ -1,4 +1,4 @@
 class Selection < ApplicationRecord
   belongs_to :product
-  belongs_to :session
+  belongs_to :livecast
 end

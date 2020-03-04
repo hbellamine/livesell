@@ -33,7 +33,7 @@ end
 private
 
 def params_product
-params.require(:product).permit(:description, :photos, :color, :size, :qty, :price)
+params.require(:product).permit(:description, :color, :size, :qty, :price, pictures: [])
 end
 
 

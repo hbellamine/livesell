@@ -30,9 +30,12 @@ class LivecastsController < ApplicationController
   end
 
   def show
-     livecast = Livecast.find(params[:id])
-     @selection = Selection.where(livecast_id: livecast.id)
+    @livecast = Livecast.find(params[:id])
+    @selection = Selection.where(livecast: @livecast)
+  end
 
+  def get_fb_id
+    @livecast = Livecast.find(params[:id])
   end
 
   def mylivecasts
@@ -56,7 +59,9 @@ class LivecastsController < ApplicationController
 
   def update
     @livecast = Livecast.find(params[:id])
+    @livecast.confirmed = true
     if @livecast.update(params_livecast_url)
+
       redirect_to livecast_path(@livecast)
     else
       p @livecast.errors
@@ -79,7 +84,7 @@ class LivecastsController < ApplicationController
   end
 
   def params_livecast_url
-    params.require(:livecast).permit(:title, :date, :start_time, :category, :mode, :picture, :url)
+    params.require(:livecast).permit(:title, :date, :start_time, :category, :mode, :picture, :url, :confirmed)
   end
 
 end

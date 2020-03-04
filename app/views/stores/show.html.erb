@@ -8,27 +8,33 @@
 
 <%end%>
 
-<div class= "productshow">
+<% @products.each do |product| %>
+
+  <div class= "productshow">
     <div>
       <div class="displayproducts">
+          <div class="card-trip">
+<%raise%>
+        <% product.photos.each do |photo| %>
 
-      <% @products.each do |product| %>
+            <%= cl_image_tag product.photo.key, height: 300, width: 400, crop: :fill %>
+        <% end %>
 
 
-
-            <%= product.description %>
-            <%= product.color%>
-            <%= product.size%>
-            <%= product.price%>
-
+        <div class="card-trip-infos">
+          <div>
+              <h2><%= product.description %></h2>
+              <p><%= product.color%></p>
+              <p><%= product.size%></p>
+          </div>
+          <h2 class="card-trip-pricing"><%= product.price%></h2>
+        </div>
+      </div>
 
             <%if (params[:livecast] != nil)%>
             <%= link_to "Add to livecast",livecast_product_selection_path(params[:livecast],product.id) %>
             <%end%>
-      <%end%>
+<%end%>
       </div>
-    </div>
-
-</div>
 
 

@@ -16,6 +16,8 @@ class SelectionsController < ApplicationController
     end
 
     @selection.product_id = params[:product_id]
+    @selection.user_id = current_user.id
+
 
     @livecast = Livecast.find(params[:livecast_id])
 

@@ -1,0 +1,28 @@
+
+ <% @livecasts.each do |livecast| %>
+  <% if livecast.mode == "pub" %>
+    <div class="card-product">
+      <%= cl_image_tag livecast.picture.attachment.key, height: 300, width: 400, crop: :fill, class: "img-rounded" %>
+
+      <div class="card-product-infos">
+        <h3><%= livecast.title %></h3>
+        <h2 style="font-size: 16px;">From: <%= livecast.date %></h2>
+        <h2>At: <%= livecast.start_time %><h2>
+        <h2>N°-Selected products: <h2 style="color:red;"><%= Selection.where(livecast: livecast).count %></h2>
+      </div>
+    <% if livecast.confirmed == true %>
+      <div class="confirm-button">
+      <% livecast.store_id = @store.id %>
+         <%= link_to "Access to the live cast", livecast_path(livecast.id), class: "btn btn-primary" %>
+      </div>
+    <% else %>
+          <div class="confirm-button">
+      <% livecast.store_id = @store.id %>
+         <%= link_to "Not accessible yet", root_path , class: "btn btn-danger" %>
+      </div>
+
+    <%end%>
+
+      </div>
+  <%end%>
+<%end%>

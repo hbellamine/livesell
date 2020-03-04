@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_04_162629) do
+ActiveRecord::Schema.define(version: 2020_03_04_162633) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 2020_03_04_162629) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "mode", default: 0
+    t.boolean "confirmed", default: false
     t.index ["store_id"], name: "index_livecasts_on_store_id"
     t.index ["user_id"], name: "index_livecasts_on_user_id"
   end
@@ -79,7 +80,6 @@ ActiveRecord::Schema.define(version: 2020_03_04_162629) do
     t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "pictures"
     t.string "description"
     t.index ["store_id"], name: "index_products_on_store_id"
   end
@@ -89,8 +89,20 @@ ActiveRecord::Schema.define(version: 2020_03_04_162629) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "livecast_id"
+    t.bigint "user_id"
     t.index ["livecast_id"], name: "index_selections_on_livecast_id"
     t.index ["product_id"], name: "index_selections_on_product_id"
+    t.index ["user_id"], name: "index_selections_on_user_id"
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.string "date"
+    t.string "productscategory"
+    t.string "state"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
   create_table "stores", force: :cascade do |t|
@@ -122,5 +134,7 @@ ActiveRecord::Schema.define(version: 2020_03_04_162629) do
   add_foreign_key "products", "stores"
   add_foreign_key "selections", "livecasts"
   add_foreign_key "selections", "products"
+  add_foreign_key "selections", "users"
+  add_foreign_key "sessions", "users"
   add_foreign_key "stores", "users"
 end

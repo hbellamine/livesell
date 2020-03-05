@@ -1,32 +1,35 @@
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+<div id="wrapper">
 
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v6.0&appId=1307859595905955&autoLogAppEvents=1"></script>
-<div class="showpage">
- <div class="live">
-    <div class="cast">
 
-      <div class="fb-video" data-href="<%= @livecast.url %>" data-width="300" data-show-text="false">
-        <blockquote cite="https://developers.facebook.com/facebookapp/videos/10153231379946729/" class="fb-xfbml-parse-ignore"><a href="https://developers.facebook.com/facebookapp/videos/10153231379946729/">
-        How to Share With Just Friends</a><p>How to share with just friends.</p>
-        Publiée par <a href="https://www.facebook.com/facebookapp/">Facebook App</a>
-      sur Vendredi 5 décembre 2014</blockquote></div>
-    </div>
- <!--  if it is a seller profile  -->
-    <div class="livereporting" style="width:90px;height:120px">
-    </div>
 
-  <!-- if it is a buyer profil -->
-    <div class="nowproduct">
-    </div>
+
+  <div id="sidebar">
+
+
+    <div style="display: flex;">
+      <div class="cart-icon-bottom"></div>
+     <div> <h3>Add to selection</h3></div>
+   </div>
+
+
+
+<% if @selection != nil %>
+  <ul>
+  <% @selection.each do |selection| %>
+  <% product = Product.find(selection.product_id)%>
+  <li><%= product.description %></li> <%= link_to "delete", livecast_product_destroyselection_path(:id => selection.id, :livecast_id => @livecast.id,:product_id => product.id),method: :delete %>
+  <%end%>
+
+</ul>
+<% end %>
   </div>
 
-  <div class="nextproducts">
 
-  </div>
+
 
   <div id="grid">
-<% @selection.each do |selection| %>
-    <% product = Product.find(selection.product_id) %>
+<% @products.each do |product| %>
     <div class="product">
       <div class="info-large">
         <h4><%=product.description%></h4>
@@ -56,7 +59,7 @@
           <%= cl_image_tag product.pictures[0].key, height: 400, width: 500, crop: :fill %>
           <div class="image_overlay"></div>
           <% if @selection != nil %>
-          <div class= "add_to_cart"><%= link_to "buy now" %></div>
+          <div class= "add_to_cart"><%= link_to "Add to selection",livecast_product_selection_path(params[:livecast],product.id), style: "text-decoration: none; color: white;" %></div>
           <% end %>
           <div class="view_gallery">View gallery</div>
           <div class="stats">
@@ -116,6 +119,3 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="menu.js"></script>
-
-
-

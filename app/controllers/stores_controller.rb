@@ -13,8 +13,10 @@ class StoresController < ApplicationController
     storearr = Store.where(user_id: current_user.id)
     @store = storearr[0]
     @products = Product.where(store_id: @store.id)
-    @livecast = Livecast.where(id: params[:livecast_id])
-    @selection = Selection.where(id: params[:livecast_id])
+  if params[:livecast] != nil
+    @livecast = Livecast.find(params[:livecast])
+    @selection = Selection.where(livecast_id: params[:livecast])
+  end
 
   end
 

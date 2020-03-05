@@ -8,3 +8,12 @@ var source = new EventSource(url);
 source.onmessage = function(event) {
   console.log(event)
 };
+
+
+
+import { store } from '../components/store';
+store();
+
+import { home } from '../components/home';
+home();
+

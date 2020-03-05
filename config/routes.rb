@@ -19,11 +19,14 @@ Rails.application.routes.draw do
   resources :livecasts do
     resources :products, only:[:show] do
       get 'livecast_selection', to: 'selections#add' , as: 'selection'
+      delete 'selections/:id', to: 'selections#destroy', as: 'destroyselection'
       resources :selections
+
     end
 
   end
   get 'my_livecasts', to: 'livecasts#mylivecasts' , as: 'usermylivecasts'
+
 end
 
 

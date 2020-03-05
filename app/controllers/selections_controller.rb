@@ -23,8 +23,14 @@ class SelectionsController < ApplicationController
 
     @selection.livecast_id = @livecast.id
 
-     @selection.save
-      redirect_to new_store_path(params[:livecast_id]), notice: "product added to the livecast"
+    if  @selection.save
+      redirect_to request.referrer, notice: "product added to the livecast"
+    else
+      raise
+    end
+
+
+
 
   end
 
@@ -40,5 +46,9 @@ class SelectionsController < ApplicationController
   end
 
   def destroy
+    @selection = Selection.find(params[:id])
+    @selection.destroy
+    redirect_to request.referrer, notice: "product deleted from the selection"
+
   end
 end

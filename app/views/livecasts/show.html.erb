@@ -1,121 +1,108 @@
-
+<div class="container">
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v6.0&appId=1307859595905955&autoLogAppEvents=1"></script>
-<div class="showpage">
- <div class="live">
-    <div class="cast">
 
-      <div class="fb-video" data-href="<%= @livecast.url %>" data-width="300" data-show-text="false">
-        <blockquote cite="https://developers.facebook.com/facebookapp/videos/10153231379946729/" class="fb-xfbml-parse-ignore"><a href="https://developers.facebook.com/facebookapp/videos/10153231379946729/">
-        How to Share With Just Friends</a><p>How to share with just friends.</p>
-        Publiée par <a href="https://www.facebook.com/facebookapp/">Facebook App</a>
-      sur Vendredi 5 décembre 2014</blockquote></div>
-    </div>
- <!--  if it is a seller profile  -->
-    <div class="livereporting" style="width:90px;height:120px">
-    </div>
+          <div class="d-flex">
+              <div class="fb-video" style="width: 430px;margin-left: 0px;margin-right: 0px;" data-href="<%= @livecast.url %>" data-width="300" data-show-text="false">
+                  <blockquote cite="https://developers.facebook.com/facebookapp/videos/10153231379946729/" class="fb-xfbml-parse-ignore"><a href="https://developers.facebook.com/facebookapp/videos/10153231379946729/">
+                  How to Share With Just Friends</a><p>How to share with just friends.</p>
+                  Publiée par <a href="https://www.facebook.com/facebookapp/">Facebook App</a>
+                  sur Vendredi 5 décembre 2014</blockquote></div>
+              </div>
+            </div>
+              <!--  if it is a seller profile  -->
+            <div style ="width: 550px; height: 400px;background-color: white; box-shadow: 2px 2px 2px lightgray;border-radius: 5px;">
+              <h1>Livecast Earnings </h1>
+              <%= render 'shared/chart'%>
+            </div>
 
-  <!-- if it is a buyer profil -->
-    <div class="nowproduct">
-    </div>
-  </div>
+          </div>
+    <div id="grid-2">
+        <% @selection.each do |selection| %>
+          <% product = Product.find(selection.product_id) %>
+            <div class="product">
+              <div class="info-large">
+                    <h4><%=product.description%></h4>
+                    <div class="price-big">
+                      <span><%=product.price%>$</span>
+                    </div>
 
-  <div class="nextproducts">
+                    <h3>COLORS</h3>
+                    <div class="colors-large">
+                      <ul>
+                        <li><%= product.color%><span></span></a></li>
+                      </ul>
+                    </div>
 
-  </div>
+                    <h3>SIZE</h3>
+                    <div class="sizes-large">
+                      <span><%= product.size %></span>
+                    </div>
 
-  <div id="grid">
-<% @selection.each do |selection| %>
-    <% product = Product.find(selection.product_id) %>
-    <div class="product">
-      <div class="info-large">
-        <h4><%=product.description%></h4>
+                    <button class="add-cart-large">Add To Selection</button>
+              </div>
 
-        <div class="price-big">
-          <span><%=product.price%>$</span>
-        </div>
+              <div class="make3D">
+                <div class="product-front">
+                      <div class="shadow"></div>
+                        <%= cl_image_tag product.pictures[0].key, height: 400, width: 500, crop: :fill %>
+                      <div class="image_overlay"></div>
+                      <% if @selection != nil %>
+                        <div class= "add_to_cart"><%= link_to "buy now" %></div>
+                      <% end %>
+                          <div class="view_gallery">View gallery</div>
+                        <div class="stats">
+                            <div class="stats-container">
+                              <span class="product_price"><%=product.price%></span>
+                              <span class="product_name"><%=product.description%></span>
 
-        <h3>COLORS</h3>
-        <div class="colors-large">
-          <ul>
-            <li><%= product.color%><span></span></a></li>
-          </ul>
-        </div>
+                              <div class="product-options">
+                                  <strong>SIZES</strong>
+                                  <span><%=product.size%></span>
+                                  <strong>COLORS</strong>
+                                <div class="colors">
+                                  <div class="c-blue"><%=product.color%><span></span></div>
+                                </div>
 
-        <h3>SIZE</h3>
-        <div class="sizes-large">
-          <span><%= product.size %></span>
-        </div>
+                              </div>
 
-        <button class="add-cart-large">Add To Selection</button>
+                            </div>
+                        </div>
+                </div>
 
-      </div>
-      <div class="make3D">
-        <div class="product-front">
-          <div class="shadow"></div>
-          <%= cl_image_tag product.pictures[0].key, height: 400, width: 500, crop: :fill %>
-          <div class="image_overlay"></div>
-          <% if @selection != nil %>
-          <div class= "add_to_cart"><%= link_to "buy now" %></div>
-          <% end %>
-          <div class="view_gallery">View gallery</div>
-          <div class="stats">
-            <div class="stats-container">
-              <span class="product_price"><%=product.price%></span>
-              <span class="product_name"><%=product.description%></span>
+                <div class="product-back">
+                    <div class="shadow"></div>
 
+                      <div class="carousel">
+                        <ul class="carousel-container">
+                          <% product.pictures.each do |picture| %>
+                          <li><%= cl_image_tag picture.key, height: 400, width: 500, crop: :fill %></li>
+                          <%end%>
+                        </ul>
 
-              <div class="product-options">
-                <strong>SIZES</strong>
-                <span><%=product.size%></span>
-                <strong>COLORS</strong>
-                <div class="colors">
-                  <div class="c-blue"><%=product.color%><span></span></div>
+                        <div class="arrows-perspective">
+                          <div class="carouselPrev">
+                            <div class="y"></div>
+                            <div class="x"></div>
+                          </div>
+
+                          <div class="carouselNext">
+                              <div class="y"></div>
+                              <div class="x"></div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="flip-back">
+                        <div class="cy"></div>
+                        <div class="cx"></div>
+                      </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        <div class="product-back">
-          <div class="shadow"></div>
-          <div class="carousel">
-            <ul class="carousel-container">
-              <% product.pictures.each do |picture| %>
-              <li><%= cl_image_tag picture.key, height: 400, width: 500, crop: :fill %></li>
-              <%end%>
-            </ul>
-            <div class="arrows-perspective">
-              <div class="carouselPrev">
-                <div class="y"></div>
-                <div class="x"></div>
-              </div>
-              <div class="carouselNext">
-                <div class="y"></div>
-                <div class="x"></div>
-              </div>
-            </div>
-          </div>
-          <div class="flip-back">
-            <div class="cy"></div>
-            <div class="cx"></div>
-          </div>
-        </div>
-      </div>
+        <%end%>
     </div>
-
- <%end%>
-      </div>
-
-    </div>
-
-  </div>
-
 </div>
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="menu.js"></script>
 
 
 

@@ -9,6 +9,8 @@ gem 'puma'
 gem 'rails', '5.2.4.1'
 gem 'redis'
 gem 'dotenv-rails'
+gem "chartkick"
+gem "groupdate"
 
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass', '~> 5.12.0'

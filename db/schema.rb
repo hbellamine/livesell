@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_05_081245) do
+ActiveRecord::Schema.define(version: 2020_03_05_212104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,15 @@ ActiveRecord::Schema.define(version: 2020_03_05_081245) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
+  create_table "product_sizes", force: :cascade do |t|
+    t.bigint "product_id"
+    t.bigint "size_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_product_sizes_on_product_id"
+    t.index ["size_id"], name: "index_product_sizes_on_size_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "color"
     t.string "size"
@@ -80,8 +89,15 @@ ActiveRecord::Schema.define(version: 2020_03_05_081245) do
     t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "pictures"
     t.string "description"
     t.index ["store_id"], name: "index_products_on_store_id"
+  end
+
+  create_table "quantities", force: :cascade do |t|
+    t.integer "qty"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "selections", force: :cascade do |t|
@@ -95,14 +111,10 @@ ActiveRecord::Schema.define(version: 2020_03_05_081245) do
     t.index ["user_id"], name: "index_selections_on_user_id"
   end
 
-  create_table "sessions", force: :cascade do |t|
-    t.string "date"
-    t.string "productscategory"
-    t.string "state"
-    t.bigint "user_id"
+  create_table "sizes", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
   create_table "stores", force: :cascade do |t|
@@ -131,10 +143,11 @@ ActiveRecord::Schema.define(version: 2020_03_05_081245) do
   add_foreign_key "livecasts", "stores"
   add_foreign_key "livecasts", "users"
   add_foreign_key "orders", "users"
+  add_foreign_key "product_sizes", "products"
+  add_foreign_key "product_sizes", "sizes"
   add_foreign_key "products", "stores"
   add_foreign_key "selections", "livecasts"
   add_foreign_key "selections", "products"
   add_foreign_key "selections", "users"
-  add_foreign_key "sessions", "users"
   add_foreign_key "stores", "users"
 end

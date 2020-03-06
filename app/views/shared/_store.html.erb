@@ -1,22 +1,20 @@
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
 <div id="wrapper">
-  <div id="sidebar">
+  <% if @selection != nil %>
+    <div id="sidebar">
+      <div style="display: flex;">
+        <div class="cart-icon-bottom"></div>
+        <div> <h3>Add to selection</h3></div>
+      </div>
 
-    <div style="display: flex;">
-      <div class="cart-icon-bottom"></div>
-     <div> <h3>Add to selection</h3></div>
-   </div>
-
-    <% if @selection != nil %>
-      <ul>
-      <% @selection.each do |selection| %>
-      <% product = Product.find(selection.product_id)%>
-      <li><%= product.description %></li> <%= link_to "delete", livecast_product_destroyselection_path(:id => selection.id, :livecast_id => @livecast.id,:product_id => product.id),method: :delete %>
-      <%end%>
-
-    </ul>
-    <% end %>
-  </div>
+        <ul>
+          <% @selection.each do |selection| %>
+          <% product = Product.find(selection.product_id)%>
+          <li><%= product.description %></li> <%= link_to "delete", livecast_product_destroyselection_path(:id => selection.id, :livecast_id => @livecast.id,:product_id => product.id),method: :delete %>
+          <%end%>
+        </ul>
+    </div>
+ <% end %>
 
   <div id="grid">
     <% @products.each do |product| %>

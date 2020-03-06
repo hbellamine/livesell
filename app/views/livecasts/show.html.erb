@@ -2,23 +2,25 @@
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v6.0&appId=1307859595905955&autoLogAppEvents=1"></script>
 
-          <div class="d-flex">
-              <div class="fb-video"  data-href="<%= @livecast.url %>" data-width="450" data-show-text="false">
+          <div class="d-flex" style="margin-top: 10px;">
+              <div class="fb-video" style="box-shadow: 3px 3px 3px gray;" data-href="<%= @livecast.url %>" data-width="450" data-height="400" data-show-text="false">
                   <blockquote cite="https://developers.facebook.com/facebookapp/videos/10153231379946729/" class="fb-xfbml-parse-ignore"><a href="https://developers.facebook.com/facebookapp/videos/10153231379946729/">
                   How to Share With Just Friends</a><p>How to share with just friends.</p>
                   Publiée par <a href="https://www.facebook.com/facebookapp/">Facebook App</a>
                   sur Vendredi 5 décembre 2014</blockquote></div>
               </div>
-            <div style ="width: 550px; height: 400px;background-color: white; box-shadow: 2px 2px 2px lightgray;border-radius: 5px;">
+              <% if @livecast.user_id == current_user.id %>
+            <div style ="width: 550px; height: 400px;background-color: rgba(255, 255, 255,0.5); box-shadow: 2px 2px 2px lightgray;border-radius: 5px;margin-top: 10px;">
               <h1>Livecast Earnings </h1>
               <%= render 'shared/chart'%>
             </div>
+            <%end%>
             </div>
               <!--  if it is a seller profile  -->
 
 
           </div>
-    <div id="grid-2">
+    <div id="grid-2" style="background-color:white;margin-top: 50px;">
         <% @selection.each do |selection| %>
           <% product = Product.find(selection.product_id) %>
             <div class="product">

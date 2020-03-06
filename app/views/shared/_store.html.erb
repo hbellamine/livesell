@@ -1,114 +1,104 @@
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
 <div id="wrapper">
-
-
-
-
   <div id="sidebar">
-
 
     <div style="display: flex;">
       <div class="cart-icon-bottom"></div>
      <div> <h3>Add to selection</h3></div>
    </div>
 
+    <% if @selection != nil %>
+      <ul>
+      <% @selection.each do |selection| %>
+      <% product = Product.find(selection.product_id)%>
+      <li><%= product.description %></li> <%= link_to "delete", livecast_product_destroyselection_path(:id => selection.id, :livecast_id => @livecast.id,:product_id => product.id),method: :delete %>
+      <%end%>
 
-
-<% if @selection != nil %>
-  <ul>
-  <% @selection.each do |selection| %>
-  <% product = Product.find(selection.product_id)%>
-  <li><%= product.description %></li> <%= link_to "delete", livecast_product_destroyselection_path(:id => selection.id, :livecast_id => @livecast.id,:product_id => product.id),method: :delete %>
-  <%end%>
-
-</ul>
-<% end %>
+    </ul>
+    <% end %>
   </div>
 
-
-
-
   <div id="grid">
-<% @products.each do |product| %>
-    <div class="product">
-      <div class="info-large">
-        <h4><%=product.description%></h4>
+    <% @products.each do |product| %>
+        <div class="product">
+          <div class="info-large">
+            <h4><%=product.description%></h4>
 
-        <div class="price-big">
-          <span><%=product.price%>$</span>
-        </div>
+            <div class="price-big">
+              <span><%=product.price%>$</span>
+            </div>
 
-        <h3>COLORS</h3>
-        <div class="colors-large">
-          <ul>
-            <li><%= product.color%><span></span></a></li>
-          </ul>
-        </div>
+            <h3>COLORS</h3>
+            <div class="colors-large">
+              <ul>
+                <li><%= product.color%><span></span></a></li>
+              </ul>
+            </div>
 
-        <h3>SIZE</h3>
-        <div class="sizes-large">
-          <span><%= product.sizes %></span>
-        </div>
+            <h3>SIZE</h3>
+            <div class="sizes-large">
+              <span><%= product.sizes %></span>
+            </div>
 
-        <button class="add-cart-large">Add To Selection</button>
+            <button class="add-cart-large">Add To Selection</button>
 
-      </div>
-      <div class="make3D">
-        <div class="product-front">
-          <div class="shadow"></div>
-          <%= cl_image_tag product.pictures[0].key, height: 400, width: 500, crop: :fill %>
-          <div class="image_overlay"></div>
-          <% if @selection != nil %>
-          <div class= "add_to_cart"><%= link_to "Add to selection",livecast_product_selection_path(params[:livecast],product.id), style: "text-decoration: none; color: white;" %></div>
-          <% end %>
-          <div class="view_gallery">View gallery</div>
-          <div class="stats">
-            <div class="stats-container">
-              <span class="product_price"><%=product.price%></span>
-              <span class="product_name"><%=product.description%></span>
+          </div>
+          <div class="make3D">
+            <div class="product-front">
+              <div class="shadow"></div>
+              <%= cl_image_tag product.pictures[0].key %>
+              <div class="image_overlay"></div>
+              <% if @selection != nil %>
+                <div class= "add_to_cart"><%= link_to "Add to selection",livecast_product_selection_path(params[:livecast],product.id), style: "text-decoration: none; color: white;" %></div>
+              <% end %>
+              <div class="view_gallery">View gallery</div>
+              <div class="stats">
+                <div class="stats-container">
+                  <span class="product_price"><%=product.price%></span>
+                  <span class="product_name"><%=product.description%></span>
 
 
-              <div class="product-options">
-                <strong>SIZES</strong>
-                <span><%=product.size%></span>
-                <strong>COLORS</strong>
-                <div class="colors">
-                  <div class="c-blue"><%=product.color%><span></span></div>
+                  <div class="product-options">
+                    <strong>SIZES</strong>
+                    <span><%=product.size%></span>
+                    <strong>COLORS</strong>
+                    <div class="colors">
+                      <div class="c-blue"><%=product.color%><span></span></div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
 
-        <div class="product-back">
-          <div class="shadow"></div>
-          <div class="carousel">
-            <ul class="carousel-container">
-              <% product.pictures.each do |picture| %>
-              <li><%= cl_image_tag picture.key, height: 400, width: 500, crop: :fill %></li>
-              <%end%>
-            </ul>
-            <div class="arrows-perspective">
-              <div class="carouselPrev">
-                <div class="y"></div>
-                <div class="x"></div>
+            <div class="product-back">
+              <div class="shadow"></div>
+              <div class="carousel">
+                <ul class="carousel-container">
+                  <% product.pictures.each do |picture| %>
+                    <li><%= cl_image_tag picture.key %></li>
+                  <%end%>
+                </ul>
+                <div class="arrows-perspective">
+                  <div class="carouselPrev">
+                    <div class="y"></div>
+                    <div class="x"></div>
+                  </div>
+                  <div class="carouselNext">
+                    <div class="y"></div>
+                    <div class="x"></div>
+                  </div>
+                </div>
               </div>
-              <div class="carouselNext">
-                <div class="y"></div>
-                <div class="x"></div>
+              <div class="flip-back">
+                <div class="cy"></div>
+                <div class="cx"></div>
               </div>
             </div>
           </div>
-          <div class="flip-back">
-            <div class="cy"></div>
-            <div class="cx"></div>
-          </div>
         </div>
-      </div>
-    </div>
 
- <%end%>
-      </div>
+     <%end%>
+  </div>
 
     </div>
 

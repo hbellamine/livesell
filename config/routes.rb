@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get 'stores/:id', to: 'stores#show', as: 'mystore'
 
   resources :stores, only: [:index,:new,:create,:show] do
-    resources :products, only:[:new, :create,:edit, :update, :show, :destroy]
+    resources :products, only: [:new, :create,:edit, :update, :show, :destroy]
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -22,7 +22,6 @@ Rails.application.routes.draw do
       get 'livecast_selection', to: 'selections#add' , as: 'selection'
       delete 'selections/:id', to: 'selections#destroy', as: 'destroyselection'
       resources :selections
-
     end
 
   end

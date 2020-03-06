@@ -5,7 +5,7 @@ JSResult
 
 #wrapper{
     overflow: hidden;
-    height: 1153px;
+    height: 500vh;
     width: 1100px;
     background:#fff;
 }
@@ -73,12 +73,19 @@ JSResult
 #grid{
     display: grid;
     grid-template-columns: 1fr 1fr;
-
     margin-left : 50px;
     position: absolute;
     left: 340px;
     height: 100vh;
     top: 180px;
+}
+
+#grid-2{
+    display: grid;
+    margin:0px;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: 100vh;
+
 }
 #sidebar{
     float:left;

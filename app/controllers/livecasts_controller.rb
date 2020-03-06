@@ -22,7 +22,7 @@ class LivecastsController < ApplicationController
     @livecast.store = @store
 
     if @livecast.save
-      redirect_to livecasts_path, notice: "Livecast created"
+      redirect_to usermylivecasts_path, notice: "Livecast created"
     else
       p @livecast.errors.messages
       render :new

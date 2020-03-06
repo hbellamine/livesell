@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   resources :stores, only: [:edit, :update]
+  get 'stores/:id', to: 'stores#show', as: 'mystore'
 
   resources :stores, only: [:index,:new,:create,:show] do
     resources :products, only:[:new, :create,:edit, :update, :show, :destroy]

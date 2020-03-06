@@ -10,10 +10,11 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(params_product)
-     @product.store = Store.find(params[:store_id])
-
+    @product.store = Store.find(params[:store_id])
     if @product.save
+
       redirect_to store_path(@product.store_id)
+
     else
       render :new
     end
@@ -33,7 +34,7 @@ end
 private
 
 def params_product
-params.require(:product).permit(:description, :color, :size, :qty, :price, pictures: [])
+params.require(:product).permit(:description, :color, :size_ids, :qty, :price, pictures: [])
 end
 
 

@@ -11,7 +11,7 @@ gem 'redis'
 gem 'dotenv-rails'
 gem "chartkick"
 gem "groupdate"
-
+gem 'omniauth-facebook'
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass', '~> 5.12.0'
 gem 'sassc-rails'

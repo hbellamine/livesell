@@ -1,6 +1,6 @@
 <div class="container d-flex justify-content-between">
 <div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v6.0&appId=1307859595905955&autoLogAppEvents=1"></script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v6.0&appId=<%=ENV["FB_ID"]%>&autoLogAppEvents=1"></script>
 
           <div class="d-flex" style="margin-top: 10px;">
               <div class="fb-video" style="box-shadow: 3px 3px 3px gray;" data-href="<%= @livecast.url %>" data-width="450" data-height="400" data-show-text="false">

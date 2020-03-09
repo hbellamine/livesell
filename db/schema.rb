@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_09_113616) do
+ActiveRecord::Schema.define(version: 2020_03_09_175334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,12 @@ ActiveRecord::Schema.define(version: 2020_03_09_113616) do
     t.index ["product_id"], name: "index_buyings_on_product_id"
   end
 
+  create_table "chat_rooms", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "colors", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -69,6 +75,16 @@ ActiveRecord::Schema.define(version: 2020_03_09_113616) do
     t.index ["user_id"], name: "index_livecasts_on_user_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "chat_room_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_room_id"], name: "index_messages_on_chat_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.bigint "user_id"
     t.string "state"
@@ -83,6 +99,7 @@ ActiveRecord::Schema.define(version: 2020_03_09_113616) do
     t.bigint "color_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "quantity", default: 1
     t.index ["color_id"], name: "index_product_colors_on_color_id"
     t.index ["product_id"], name: "index_product_colors_on_product_id"
   end
@@ -92,6 +109,7 @@ ActiveRecord::Schema.define(version: 2020_03_09_113616) do
     t.bigint "shoesize_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "quantity", default: 1
     t.index ["product_id"], name: "index_product_shoesizes_on_product_id"
     t.index ["shoesize_id"], name: "index_product_shoesizes_on_shoesize_id"
   end
@@ -178,6 +196,8 @@ ActiveRecord::Schema.define(version: 2020_03_09_113616) do
   add_foreign_key "buyings", "products"
   add_foreign_key "livecasts", "stores"
   add_foreign_key "livecasts", "users"
+  add_foreign_key "messages", "chat_rooms"
+  add_foreign_key "messages", "users"
   add_foreign_key "orders", "users"
   add_foreign_key "product_colors", "colors"
   add_foreign_key "product_colors", "products"

@@ -9,11 +9,13 @@
 
 
 
-
+ProductColor.destroy_all
+ProductShoesize.destroy_all
 Color.destroy_all
 Shoesize.destroy_all
 Selection.destroy_all
 ProductSize.destroy_all
+
 Product.destroy_all
 Size.destroy_all
 

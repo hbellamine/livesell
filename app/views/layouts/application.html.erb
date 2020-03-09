@@ -7,14 +7,14 @@
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
       <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body class="<%= controller_name %> <%= action_name %>">
     <script>
       window.fbAsyncInit = function() {
         FB.init({
-          appId      : 'ENV["FB_ID"]',
+          appId      : <%=ENV["FB_ID"]%>,
           xfbml      : true,
           version    : 'v6.0'
         });
@@ -37,7 +37,7 @@
       <%= render 'shared/navbar' %>
       <%= render 'shared/flashes' %>
       <%= yield %>
-      <%= javascript_include_tag 'application' %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
       <%= javascript_pack_tag 'application' %>
     </div>
 

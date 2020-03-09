@@ -32,6 +32,7 @@ class LivecastsController < ApplicationController
   def show
     @livecast = Livecast.find(params[:id])
     @selection = Selection.where(livecast: @livecast)
+
   end
 
   def get_fb_id

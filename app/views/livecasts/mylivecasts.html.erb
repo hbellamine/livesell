@@ -21,6 +21,8 @@
       <% livecast.store_id = @store.id %>
 
           <%= link_to "Add products to this livecast", store_path(livecast.store, livecast: livecast.id) ,class: "btn btn-danger" %>
+
+
           <%= link_to livecast_path(livecast.id), method: :delete do%>
             <h1>Delete</h1>
         <%end%>

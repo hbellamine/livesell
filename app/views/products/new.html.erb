@@ -1,15 +1,17 @@
-<div class="creatproduct">
-    <%= simple_form_for [@store, @product] do |f| %>
-        <%= image_tag("https://res.cloudinary.com/dnwnxu6xb/image/upload/v1583168428/young-asia-happy-lady-live-video-blog-vlogger-sales-clothes-online-e-commerce-shopping-shop_53255-543_eracxy.jpg") %>
-        <%= f.input :pictures, as: :file, input_html: { multiple: true } %>
-        <%= f.input :description %>
-        <%= f.input :color %>
-        <%= f.association :sizes, as: :check_boxes %>
-        <%= f.input :qty %>
-        <%= f.input :price %>
-        <%=f.submit%>
-  <%end%>
-</div>
+<!-- <div class="creatproduct">
+    <%#= #simple_form_for [@store, @product] do |f| %>
+        <%#= image_tag("https://res.cloudinary.com/dnwnxu6xb/image/upload/v1583168428/young-asia-happy-lady-live-video-blog-vlogger-sales-clothes-online-e-commerce-shopping-shop_53255-543_eracxy.jpg") %>
+        <%#= #f.input :pictures, as: :file, input_html: { multiple: true } %>
+        <%#= #f.input :description %>
+        <%#= #f.input :color %>
+        <%#= #f.association :sizes, as: :check_boxes %>
+        <%#= #f.input :qty %>
+        <%#= #f.input :price %>
+        <%#=#f.submit%>
+  <%#end%>
+</div> -->
+
+<%= render 'shared/clothesform' %>
 
 
 

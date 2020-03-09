@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_06_161200) do
+ActiveRecord::Schema.define(version: 2020_03_09_113616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,12 @@ ActiveRecord::Schema.define(version: 2020_03_06_161200) do
     t.index ["product_id"], name: "index_buyings_on_product_id"
   end
 
+  create_table "colors", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "livecasts", force: :cascade do |t|
     t.string "category"
     t.integer "state", default: 0
@@ -72,25 +78,42 @@ ActiveRecord::Schema.define(version: 2020_03_06_161200) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
+  create_table "product_colors", force: :cascade do |t|
+    t.bigint "product_id"
+    t.bigint "color_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["color_id"], name: "index_product_colors_on_color_id"
+    t.index ["product_id"], name: "index_product_colors_on_product_id"
+  end
+
+  create_table "product_shoesizes", force: :cascade do |t|
+    t.bigint "product_id"
+    t.bigint "shoesize_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_product_shoesizes_on_product_id"
+    t.index ["shoesize_id"], name: "index_product_shoesizes_on_shoesize_id"
+  end
+
   create_table "product_sizes", force: :cascade do |t|
     t.bigint "product_id"
     t.bigint "size_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "quantity", default: 1
     t.index ["product_id"], name: "index_product_sizes_on_product_id"
     t.index ["size_id"], name: "index_product_sizes_on_size_id"
   end
 
   create_table "products", force: :cascade do |t|
-    t.string "color"
-    t.string "size"
-    t.integer "qty"
     t.bigint "store_id"
     t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "pictures"
     t.string "description"
+    t.string "kind"
     t.index ["store_id"], name: "index_products_on_store_id"
   end
 
@@ -109,6 +132,12 @@ ActiveRecord::Schema.define(version: 2020_03_06_161200) do
     t.index ["livecast_id"], name: "index_selections_on_livecast_id"
     t.index ["product_id"], name: "index_selections_on_product_id"
     t.index ["user_id"], name: "index_selections_on_user_id"
+  end
+
+  create_table "shoesizes", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "sizes", force: :cascade do |t|
@@ -150,6 +179,10 @@ ActiveRecord::Schema.define(version: 2020_03_06_161200) do
   add_foreign_key "livecasts", "stores"
   add_foreign_key "livecasts", "users"
   add_foreign_key "orders", "users"
+  add_foreign_key "product_colors", "colors"
+  add_foreign_key "product_colors", "products"
+  add_foreign_key "product_shoesizes", "products"
+  add_foreign_key "product_shoesizes", "shoesizes"
   add_foreign_key "product_sizes", "products"
   add_foreign_key "product_sizes", "sizes"
   add_foreign_key "products", "stores"

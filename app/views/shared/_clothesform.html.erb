@@ -1,0 +1,46 @@
+<div class="container">
+<%= simple_form_for [@store, @product] do |f| %>
+
+  <div>
+    <h2 class="fs-title">Add a new product</h2>
+    <h3 class="fs-subtitle">This is step 1</h3>
+    <%= f.input :pictures, as: :file, input_html: { multiple: true } %>
+    <%= f.input :description %>
+    <%= f.input :price %>
+    <div class="radios">
+    <%=f.collection_radio_buttons :kind, [['Makeup', 'Makeup'] ,['Clothes', 'Clothes'],['Shoes', 'Shoes'],['Bags', 'Bags']],:first, :last %>
+
+    </div>
+  </div>
+
+  <div id="Makeup">
+    <h2 class="fs-title">Makeup</h2>
+    <h3 class="fs-subtitle">Colors available</h3>
+    <%= f.association :colors, as: :check_boxes%>
+
+  </div>
+
+  <div id="Clothes">
+    <h2 class="fs-title">Clothes</h2>
+    <h3 class="fs-subtitle">Sizes available</h3>
+      <%= f.association :sizes, as: :check_boxes %>
+
+  </div>
+
+  <div id="Shoes">
+    <h2 class="fs-title">Shoes</h2>
+    <h3 class="fs-subtitle">Sizes available</h3>
+      <%= f.association :shoesizes, as: :check_boxes %>
+
+  </div>
+
+  <div id="Bags">
+    <h2 class="fs-title">Bags</h2>
+    <h3 class="fs-subtitle">Colors available</h3>
+    <%= f.association :colors, as: :check_boxes %>
+
+  </div>
+
+<%=f.submit%>
+  <%end%>
+</div>

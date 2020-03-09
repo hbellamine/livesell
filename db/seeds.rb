@@ -8,7 +8,27 @@
 
 
 
+
+
+Color.destroy_all
+Shoesize.destroy_all
+Selection.destroy_all
+ProductSize.destroy_all
+Product.destroy_all
+Size.destroy_all
+
 sizes = %w(S M L XL XXL)
 sizes.each do |size|
   Size.create!(name: size)
+end
+
+colors = %W(Black Blue Green Pink Purple Red White Yellow)
+colors.each do |color|
+  Color.create!(name: color)
+end
+
+
+shoesizes = %W(36 37 38 39 40 41 42)
+shoesizes.each do |shoesize|
+  Shoesize.create!(name: shoesize)
 end

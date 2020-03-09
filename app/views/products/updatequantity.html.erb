@@ -1,0 +1,8 @@
+<%= simple_form_for [@store, @product] do |f| %>
+<% @product_sizes.each do |product_size| %>
+  <%= f.input :product_size %>
+<% end %>
+
+<% f.submit %>
+<% end %>
+

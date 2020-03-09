@@ -1,2 +1,6 @@
-<h1>Products#edit</h1>
-<p>Find me in app/views/products/edit.html.erb</p>
+<%= simple_form_for [@store,@product], method: :get, url: edit_store_product_path do |f| %>
+  <% @product.sizes.each do |size| %>
+    <%= f.input :quantity %>
+  <% end %>
+  <%= f.submit%>
+<%end%>

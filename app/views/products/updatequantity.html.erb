@@ -1,8 +1,17 @@
-<%= simple_form_for [@store, @product] do |f| %>
-<% @product_sizes.each do |product_size| %>
-  <%= f.input :product_size %>
-<% end %>
 
-<% f.submit %>
-<% end %>
+ <%= form_tag('update_sizes', method: :patch) do %>
+  <% @product_sizes.each do |product_size| %>
+    Quantity for <%= product_size.product.description %> - <%= product_size.size.name %> <br>
+    <%= text_field_tag "#{product_size.size.name}" %> <br>
+    <%= hidden_field_tag "product_size-#{product_size.size.name}", product_size.id %>
+  <% end %>
+  <%= submit_tag "send", class:"btn btn-primary" %>
+ <% end %>
+
+
+
+
+
+
+
 

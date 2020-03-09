@@ -35,7 +35,10 @@
 
             <h3>SIZE</h3>
             <div class="sizes-large">
-              <span><%= product.sizes %></span>
+              <span><%product.sizes.each do |size|%>
+                    <%=size.name %>
+                    <%end%>
+              </span>
             </div>
 
             <button class="add-cart-large">Add To Selection</button>
@@ -43,8 +46,10 @@
           </div>
           <div class="make3D">
             <div class="product-front">
-              <div class="shadow"></div>
+              <div class="shadow"></div>`
+              <% if product.pictures.attachments.present? %>
               <%= cl_image_tag product.pictures[0].key %>
+              <% end %>
               <div class="image_overlay"></div>
               <% if @selection != nil %>
                 <div class= "add_to_cart"><%= link_to "Add to selection",livecast_product_selection_path(params[:livecast],product.id), style: "text-decoration: none; color: white;" %></div>
@@ -57,12 +62,38 @@
 
 
                   <div class="product-options">
-                    <strong>SIZES</strong>
-                    <span><%=product.size%></span>
+
+                    <% if product.kind == 'Clothes' %>
+                      <strong>SIZES Available</strong>
+                      <span><%product.sizes.each do |size|%>
+                      <%= size.name %>
+                      <% productsize = ProductSize.where(product_id: product.id , size_id: size.id)%>
+                      <%= productsize[0].quantity %>
+                      <%end%>
+                      </span>
+                    <%elsif product.kind == 'Shoes' %>
+                      <strong>SIZES Available</strong>
+                      <span><%product.shoesizes.each do |shoesize|%>
+                      <%= shoesize.name %>
+                      <% productshoesize = ProductShoesize.where(product_id: product.id , shoesize_id: shoesize.id)%>
+                      <%= productshoesize[0].quantity %>
+                      <%end%>
+                      </span>
+                    <%end%>
+
+
+                  <% if product.kind != 'Clothes' and product.kind != 'Shoes' %>
                     <strong>COLORS</strong>
                     <div class="colors">
-                      <div class="c-blue"><%=product.color%><span></span></div>
+                       <span><%product.colors.each do |color|%>
+                      <%= color.name %>
+                      <% productcolor = ProductColor.where(product_id: product.id , color_id: color.id)%>
+                      <%= productcolor[0].quantity %>
+                      <%end%>
+                      </span>
                     </div>
+                   <%end%>
+
                   </div>
                 </div>
               </div>
@@ -72,9 +103,11 @@
               <div class="shadow"></div>
               <div class="carousel">
                 <ul class="carousel-container">
-                  <% product.pictures.each do |picture| %>
-                    <li><%= cl_image_tag picture.key %></li>
-                  <%end%>
+                  <% if product.pictures.attachments.present? %>
+                    <% product.pictures.each do |picture| %>
+                      <li><%= cl_image_tag picture.key %></li>
+                    <%end%>
+                  <% end %>
                 </ul>
                 <div class="arrows-perspective">
                   <div class="carouselPrev">
@@ -106,4 +139,4 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="menu.js"></script>
+

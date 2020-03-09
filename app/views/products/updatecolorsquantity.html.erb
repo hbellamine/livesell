@@ -1,0 +1,17 @@
+ <%= form_tag('update_colors', method: :patch) do %>
+  <% @product_colors.each do |product_color| %>
+    Quantity for <%= product_color.product.description %> - <%= product_color.color.name %> <br>
+    <%= text_field_tag "#{product_color.color.name}" %> <br>
+    <%= hidden_field_tag "product_color-#{product_color.color.name}", product_color.id %>
+  <% end %>
+  <%= submit_tag "send", class:"btn btn-primary" %>
+ <% end %>
+
+
+
+
+
+
+
+
+

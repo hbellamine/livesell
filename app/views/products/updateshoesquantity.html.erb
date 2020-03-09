@@ -1,0 +1,17 @@
+ <%= form_tag('update_shoesizes', method: :patch) do %>
+  <% @product_shoesizes.each do |product_shoesize| %>
+    Quantity for <%= product_shoesize.product.description %> - <%= product_shoesize.shoesize.name %> <br>
+    <%= text_field_tag "#{product_shoesize.shoesize.name}" %> <br>
+    <%= hidden_field_tag "product_shoesize-#{product_shoesize.shoesize.name}", product_shoesize.id %>
+  <% end %>
+  <%= submit_tag "send", class:"btn btn-primary" %>
+ <% end %>
+
+
+
+
+
+
+
+
+

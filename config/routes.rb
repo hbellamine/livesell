@@ -43,6 +43,8 @@ Rails.application.routes.draw do
   end
   get 'my_livecasts', to: 'livecasts#mylivecasts' , as: 'usermylivecasts'
 
+  mount ActionCable.server => "/cable"
+
 end
 
 

@@ -1,14 +1,13 @@
 Rails.application.routes.draw do
       mount ActionCable.server => "/cable"
 
- root 'welcome#index'
+ root to: 'welcome#index'
+
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
-
-  root to: 'pages#home'
 
   resources :stores, only: [:edit, :update]
   get 'stores/:id', to: 'stores#show', as: 'mystore'
@@ -24,27 +23,20 @@ Rails.application.routes.draw do
     end
   end
 
-
-
   #resources :product_sizes, only: [:update]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-    resources :chat_rooms, only: [ :show ] do
-      resources :messages, only: [ :create ]
-    end
+  resources :chat_rooms, only: [ :show ] do
+    resources :messages, only: [ :create ], defaults: {format: :js}
+  end
   resources :livecasts do
-
-
     resources :products, only:[:show] do
       get 'livecast_selection', to: 'selections#add' , as: 'selection'
       delete 'selections/:id', to: 'selections#destroy', as: 'destroyselection'
       resources :selections
     end
-
   end
   get 'my_livecasts', to: 'livecasts#mylivecasts' , as: 'usermylivecasts'
-
-
 
 end
 

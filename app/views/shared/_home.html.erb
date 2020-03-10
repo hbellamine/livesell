@@ -45,11 +45,11 @@
 
                                               <% if product.pictures[0] == photo %>
                                                       <div class="carousel-item active" >
-                                                        <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill, style: "border-radius: 5px" %>
+                                                        <%= cl_image_tag photo.key, style: "border-radius: 5px" %>
                                                       </div>
                                               <%else%>
                                                       <div class="carousel-item " style="border-radius: 5px">
-                                                        <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill, style: "border-radius: 5px" %>
+                                                        <%= cl_image_tag photo.key,   style: "border-radius: 5px" %>
                                                       </div>
                                               <%end%>
 
@@ -68,8 +68,26 @@
 
                                   <div class="carddescription">
                                     <%= product.description %><br>
-                                    <%= product.color %><br>
-                                    <%= product.price %><br>
+                                    <% if product.kind == 'Clothes' %>
+                                        Available sizes <%product.sizes.each do |size|%> <br>
+                                        <%= size.name %> |
+                                        <%end%>
+                                    <%end%>
+
+                                    <% if product.kind == 'Shoes' %>
+                                        Available sizes <%product.shoesizes.each do |size|%>
+                                        <%= size.name %> |
+                                        <%end%>
+                                    <%end%>
+
+                                    <% if product.kind == 'Makeup' or product.kind =='Bags' %>
+                                        Available sizes <%product.colors.each do |color|%>
+                                        <%= color.name %> |
+                                        <%end%>
+                                    <%end%>
+
+
+                                    Price :<%= product.price %> € |
                                   </div>
                             </div>
                             </li>

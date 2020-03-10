@@ -1,5 +1,10 @@
 
  <%= form_tag('update_sizes', method: :patch) do %>
+
+
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+
+
   <% @product_sizes.each do |product_size| %>
     Quantity for <%= product_size.product.description %> - <%= product_size.size.name %> <br>
     <%= text_field_tag "#{product_size.size.name}" %> <br>

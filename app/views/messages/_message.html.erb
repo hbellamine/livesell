@@ -1,7 +1,8 @@
-<div class="message <%= user_is_messages_author ? "right" : "" %>">
+<div class="message <%= user_is_messages_author ? "left" : "left" %>">
 
   <% if message.user.avatar_url? %>
     <%= image_tag message.user.avatar_url, class: "avatar"  || default_image%>
     <%end%>
+  <%= message.user.email %>
   <div class="message-content"><%= message.content %></div>
 </div>

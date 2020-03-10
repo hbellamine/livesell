@@ -18,10 +18,11 @@ class LivecastsController < ApplicationController
     else
       @store = current_user.store
     end
-
     @livecast.store = @store
 
     if @livecast.save
+      @chat_room = ChatRoom.new(livecast: @livecast, name: @livecast.title)
+      @chat_room.save
       redirect_to usermylivecasts_path, notice: "Livecast created"
     else
       p @livecast.errors.messages
@@ -32,9 +33,7 @@ class LivecastsController < ApplicationController
   def show
     @livecast = Livecast.find(params[:id])
     @selection = Selection.where(livecast: @livecast)
-    @chat_room = ChatRoom.new(name: @livecast.title)
-    @chat_room.save
-
+    @chat_room = @livecast.chat_room
   end
 
   def get_fb_id
@@ -53,9 +52,6 @@ class LivecastsController < ApplicationController
     @store = storearr[0]
     @store.save
   end
-
-
-
 
   def edit
   end

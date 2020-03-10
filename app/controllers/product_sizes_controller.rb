@@ -11,10 +11,6 @@ class ProductSizesController < ApplicationController
 
   end
 
-  def update_sizes
-    raise
-
-  end
 
   private
 

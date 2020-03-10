@@ -32,6 +32,8 @@ class LivecastsController < ApplicationController
   def show
     @livecast = Livecast.find(params[:id])
     @selection = Selection.where(livecast: @livecast)
+    @chat_room = ChatRoom.new(name: @livecast.title)
+    @chat_room.save
 
   end
 

@@ -3,6 +3,8 @@ ruby '2.6.5'
 
 gem 'bootsnap', require: false
 gem 'devise'
+gem 'figaro'
+
 gem 'jbuilder', '~> 2.0'
 gem 'pg', '~> 0.21'
 gem 'puma'
@@ -21,6 +23,8 @@ gem 'webpacker'
 gem 'cloudinary', '~> 1.12.0'
 gem 'sprockets', '>= 3.0.0'
 gem 'sprockets-es6'
+gem 'jquery-rails'
+
 
 group :development do
   gem 'web-console', '>= 3.3.0'
@@ -30,7 +34,9 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'listen', '~> 3.0.5'
+
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'dotenv-rails'
+
 end

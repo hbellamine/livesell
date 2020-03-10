@@ -7,17 +7,31 @@ import "bootstrap";
 // source.onmessage = function(event) {
 //   console.log(event)
 // };
-
-
-
 import { store } from '../components/store';
-store();
-
 import { home } from '../components/home';
-home();
-
 import { newproduct } from '../components/newproduct';
+
+
+
+
+
+const livecastshow = document.querySelector('.livecasts.show')
+const storesshow = document.querySelector('.stores.show')
+if (storesshow || livecastshow ) {
+store();
+}
+
+const welcomeindex = document.querySelector('.welcomes.index')
+if (welcomeindex) {
+home();
+}
+
+
+const productsnew = document.querySelector('.products.new')
+if (productsnew) {
 newproduct();
+}
+
 
 
 

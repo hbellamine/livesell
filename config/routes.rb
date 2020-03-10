@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+      mount ActionCable.server => "/cable"
 
  root 'welcome#index'
   devise_for :users, controllers: {
@@ -28,11 +29,11 @@ Rails.application.routes.draw do
   #resources :product_sizes, only: [:update]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
-  resources :livecasts do
     resources :chat_rooms, only: [ :show ] do
       resources :messages, only: [ :create ]
     end
+  resources :livecasts do
+
 
     resources :products, only:[:show] do
       get 'livecast_selection', to: 'selections#add' , as: 'selection'
@@ -43,7 +44,7 @@ Rails.application.routes.draw do
   end
   get 'my_livecasts', to: 'livecasts#mylivecasts' , as: 'usermylivecasts'
 
-  mount ActionCable.server => "/cable"
+
 
 end
 

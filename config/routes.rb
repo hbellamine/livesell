@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
-    controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+    omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
   resources :stores, only: [:edit, :update]

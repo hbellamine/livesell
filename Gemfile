@@ -4,7 +4,8 @@ ruby '2.6.5'
 gem 'bootsnap', require: false
 gem 'devise'
 gem 'figaro'
-
+gem 'sidekiq'
+gem 'sidekiq-failures', '~> 1.0'
 gem 'jbuilder', '~> 2.0'
 gem 'pg', '~> 0.21'
 gem 'puma'

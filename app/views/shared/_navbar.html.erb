@@ -23,7 +23,14 @@
         </li>
       <% else %>
         <li class="nav-item">
-          <div class="fb-login-button" data-width="" data-size="small" data-button-type="login_with" data-layout="rounded" data-auto-logout-link="true" data-use-continue-as="false"></div>
+
+
+
+          <%- Devise.omniauth_providers.each do |provider| %>
+
+    <%= link_to " Sign in with #{OmniAuth::Utils.camelize(provider)}", user_facebook_omniauth_authorize_path , class: "fab fa-facebook-square btn btn-primary" %><br/>
+  <% end %>
+
         </li>
       <% end %>
     </ul>

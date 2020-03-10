@@ -3,7 +3,6 @@ function insertMessage(message) {
   messagesContainer.insertAdjacentHTML('beforeend', message);
   const input = document.querySelector('#message_content');
   input.value = '';
-  input.blur();
   scrollLastMessageIntoView();
 }
 

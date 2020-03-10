@@ -11,7 +11,12 @@ function scrollLastMessageIntoView() {
     left: 0,
     behavior: 'smooth'
   });
+}
 
+function focusTextField() {
   const messageField = document.getElementById('message_content');
   messageField.focus();
 }
+
+window.focusTextField = focusTextField;
+window.scrollLastMessageIntoView = scrollLastMessageIntoView;

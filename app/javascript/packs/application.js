@@ -12,7 +12,7 @@ ujs.start();
 import { store } from '../components/store';
 import { home } from '../components/home';
 import { newproduct } from '../components/newproduct';
-
+import '../components/chat';
 
 
 

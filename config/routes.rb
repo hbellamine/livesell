@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-      mount ActionCable.server => "/cable"
+
 
  root to: 'welcome#index'
 
@@ -30,6 +30,10 @@ Rails.application.routes.draw do
     resources :messages, only: [ :create ], defaults: {format: :js}
   end
   resources :livecasts do
+    member do
+      get :chart_data
+    end
+
     resources :products, only:[:show] do
       get 'livecast_selection', to: 'selections#add' , as: 'selection'
       delete 'selections/:id', to: 'selections#destroy', as: 'destroyselection'
@@ -38,6 +42,13 @@ Rails.application.routes.draw do
   end
   get 'my_livecasts', to: 'livecasts#mylivecasts' , as: 'usermylivecasts'
 
+  resources :orders, only: [:index, :show, :create] do
+    resources :payments, only: :new
+  end
+
+
+      mount ActionCable.server => "/cable"
+      mount StripeEvent::Engine, at: '/stripe-webhooks'
 end
 
 

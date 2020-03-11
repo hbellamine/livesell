@@ -1,6 +1,8 @@
 import "bootstrap";
-import ujs from "@rails/ujs";
-ujs.start();
+
+import Rails from '@rails/ujs';
+Rails.start();
+
 //https://www.facebook.com/118160454885294/videos/1039021306498134/
 //https://www.facebook.com/273690313255566/videos/874309673010737/
 
@@ -17,11 +19,16 @@ import { store } from '../components/store';
 import { home } from '../components/home';
 import { newproduct } from '../components/newproduct';
 import '../components/chat';
+import { refreshChart } from '../components/earningchart';
 
 
 
 
 const livecastshow = document.querySelector('.livecasts.show')
+if (livecastshow) {
+  refreshChart();
+}
+
 const storesshow = document.querySelector('.stores.show')
 if (storesshow) {
 store();

@@ -2,7 +2,7 @@ class ProductSizesController < ApplicationController
   def update
     @product_size = ProductSize.find(params[:id])
     store = @product_size.product.store
-    raise
+
     if @product_size.update(product_size_params)
       redirect_to store_path(store)
     else

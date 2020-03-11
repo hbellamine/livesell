@@ -33,6 +33,10 @@ class ProductsController < ApplicationController
     @store = Store.find(params[:store_id])
     @product = Product.find(params[:product_id])
     @product_colors = @product.product_colors
+    @product_colors.each do |productcolor|
+      sku = "#{productcolor.product_id}-#{productcolor.color_id}"
+      product_colors.update(sku: sku)
+    end
 
   end
 
@@ -40,13 +44,20 @@ class ProductsController < ApplicationController
     @store = Store.find(params[:store_id])
     @product = Product.find(params[:product_id])
     @product_shoesizes = @product.product_shoesizes
-
+    @product_shoesizes.each do |productsize|
+      sku = "#{productsize.product_id}-#{productsize.shoesize_id}"
+      productsize.update(sku: sku)
+    end
   end
 
   def updatequantity
     @store = Store.find(params[:store_id])
     @product = Product.find(params[:product_id])
     @product_sizes = @product.product_sizes
+    @product_sizes.each do |productsize|
+      sku = "#{productsize.product_id}-#{productsize.size_id}"
+      productsize.update(sku: sku)
+    end
 
   end
 

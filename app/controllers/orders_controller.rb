@@ -1,5 +1,11 @@
 class OrdersController < ApplicationController
 
+  def index
+    @livecasts = Livecast.where(user_id: current_user)
+    @orders = Order.all
+  end
+
+
   def create
   product = Product.find(params[:product_id])
   livecast = Livecast.find(params[:livecast_id])

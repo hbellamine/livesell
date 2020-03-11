@@ -42,7 +42,7 @@ Rails.application.routes.draw do
   end
   get 'my_livecasts', to: 'livecasts#mylivecasts' , as: 'usermylivecasts'
 
-  resources :orders, only: [:show, :create] do
+  resources :orders, only: [:index, :show, :create] do
     resources :payments, only: :new
   end
 

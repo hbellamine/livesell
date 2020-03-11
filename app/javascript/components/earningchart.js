@@ -20,4 +20,6 @@ const refreshChart = () => {
 
 export { refreshChart };
 
-  new Chartkick["ColumnChart"]("chart-1", [["19:17",150]], {});
+
+
+  new Chartkick["LineChart"]("chart-1", [["0:0",0]], {});

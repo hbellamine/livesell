@@ -12,8 +12,7 @@ class LivecastsController < ApplicationController
   def chart_data
     @livecast = Livecast.find(params[:id])
     sum = 0
-    data = Order.where(livecast: Livecast.find(7)).group_by_minute(:created_at).sum(:amount_cents).map { |x,y| { x => (sum += y)} }.reduce({}, :merge)
-
+    data = Order.where(livecast: Livecast.find(@livecast.id)).group_by_minute(:created_at).sum(:amount_cents).map { |x,y| { x => (sum += y/100)} }.reduce({}, :merge)
     render json: { earning: data }
   end
 

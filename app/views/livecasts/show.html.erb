@@ -11,6 +11,7 @@
                   sur Vendredi 5 décembre 2014</blockquote></div>
               </div>
               <% if @livecast.user_id == current_user.id %>
+
                 <div style ="width: 550px; height: 400px;background-color: rgba(255, 255, 255,0.5); box-shadow: 2px 2px 2px lightgray;border-radius: 5px;margin-top: 10px;">
                   <h1>Livecast Earnings </h1>
                  <div id="chartearning" data-livecast="<%= @livecast.id %>">

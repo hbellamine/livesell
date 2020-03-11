@@ -8,16 +8,20 @@
 
 
 
-
+ProductSize.destroy_all
 ProductColor.destroy_all
 ProductShoesize.destroy_all
 Color.destroy_all
+Size.destroy_all
 Shoesize.destroy_all
 Selection.destroy_all
-ProductSize.destroy_all
-
+Order.destroy_all
+Message.destroy_all
+ChatRoom.destroy_all
 Product.destroy_all
-Size.destroy_all
+Livecast.destroy_all
+
+
 
 sizes = %w(S M L XL XXL)
 sizes.each do |size|

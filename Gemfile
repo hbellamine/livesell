@@ -27,6 +27,7 @@ gem 'sprockets-es6'
 gem 'jquery-rails'
 gem 'money-rails'
 gem 'stripe'
+gem 'stripe_event'
 
 
 group :development do

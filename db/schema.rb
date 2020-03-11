@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_11_041911) do
+ActiveRecord::Schema.define(version: 2020_03_11_181101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 2020_03_11_041911) do
     t.datetime "updated_at", null: false
     t.integer "mode", default: 0
     t.boolean "confirmed", default: false
+    t.integer "earning", default: 0
     t.index ["store_id"], name: "index_livecasts_on_store_id"
     t.index ["user_id"], name: "index_livecasts_on_user_id"
   end
@@ -88,6 +89,8 @@ ActiveRecord::Schema.define(version: 2020_03_11_041911) do
     t.bigint "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "livecast_id"
+    t.index ["livecast_id"], name: "index_orders_on_livecast_id"
     t.index ["product_id"], name: "index_orders_on_product_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -190,6 +193,7 @@ ActiveRecord::Schema.define(version: 2020_03_11_041911) do
     t.string "avatar_url"
     t.string "provider"
     t.string "uid"
+    t.string "deliveryaddress", default: "todef"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -200,6 +204,7 @@ ActiveRecord::Schema.define(version: 2020_03_11_041911) do
   add_foreign_key "livecasts", "users"
   add_foreign_key "messages", "chat_rooms"
   add_foreign_key "messages", "users"
+  add_foreign_key "orders", "livecasts"
   add_foreign_key "orders", "products"
   add_foreign_key "orders", "users"
   add_foreign_key "product_colors", "colors"

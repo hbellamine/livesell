@@ -11,10 +11,12 @@
                   sur Vendredi 5 décembre 2014</blockquote></div>
               </div>
               <% if @livecast.user_id == current_user.id %>
-            <div style ="width: 550px; height: 400px;background-color: rgba(255, 255, 255,0.5); box-shadow: 2px 2px 2px lightgray;border-radius: 5px;margin-top: 10px;">
-              <h1>Livecast Earnings </h1>
-              <%= render 'shared/chart'%>
-            </div>
+                <div style ="width: 550px; height: 400px;background-color: rgba(255, 255, 255,0.5); box-shadow: 2px 2px 2px lightgray;border-radius: 5px;margin-top: 10px;">
+                  <h1>Livecast Earnings </h1>
+                 <div id="chartearning" data-livecast="<%= @livecast.id %>">
+                    <%= render "shared/chart", livecast: @livecast %>
+                  </div>
+                </div>
 
             <%end%>
 
@@ -62,6 +64,7 @@
                 <div class="image_overlay"></div>
 
                 <%= hidden_field_tag 'product_id', product.id %>
+                <%= hidden_field_tag 'livecast_id', @livecast.id %>
                 <!-- Need to allow the customer to choose the size or color before buying  -->
                 <!-- Need to add a hidden_field with the (size or color ) depeding on the product.kind choosed  -->
 

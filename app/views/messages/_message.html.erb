@@ -1,7 +1,9 @@
 <div class="message <%= user_is_messages_author ? "left" : "left" %>">
 
 
-    <%= image_tag message.user.facebook_picture_url, class: "avatar"  || default_image%>
+    <% if message.user.facebook_picture_url != nil %>
+      <%= image_tag message.user.facebook_picture_url, class: "avatar"  || default_image%>
+    <%end%>
     <%= message.user.first_name %>
   <div class="message-content"><%= message.content %></div>
 </div>

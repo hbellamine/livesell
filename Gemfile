@@ -25,6 +25,7 @@ gem 'cloudinary', '~> 1.12.0'
 gem 'sprockets', '>= 3.0.0'
 gem 'sprockets-es6'
 gem 'jquery-rails'
+gem 'money-rails'
 
 
 group :development do

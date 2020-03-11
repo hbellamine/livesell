@@ -1,14 +1,18 @@
 import "bootstrap";
 import ujs from "@rails/ujs";
 ujs.start();
+//https://www.facebook.com/118160454885294/videos/1039021306498134/
+//https://www.facebook.com/273690313255566/videos/874309673010737/
 
-// var id = 1105476746477957
-// var url = `https://streaming-graph.facebook.com/${id}/live_comments?access_token=EAASlfcqhS6MBADeZCIYMk6vaAb966ghu3NMcyJZCZAmObHHTQ2uwCmYZAUlWSaxuRgMBaoMoBSg10WyJrZCTbJjYCuTyOKbha8RNOj924KjVEJqficwAeFoFtzDK3TmuhZBrblwuRKiw7ujXZCcgXY2oMpejGRJt1OTyp6m8hqPAOutx3TiXK0N4egZCZARGGtc8ZD&comment_rate=one_per_two_seconds&fields=from{name,id},message`
+// var id = 874309673010737;
+// var access_token = "EAASlfcqhS6MBAIFicMOBs3An2dJXMhSrbPaifbytZAlkfuyFGPnjrENf3ZBSuUWXiNnh5qk8os0xPJbpkA6FtMXGtrbxBbwj3n0v9E3NpUbmUZAq0BJrxcuHaxBWlXAesSCd3HHFZAjQeJiZB02lZAwqBCoKjBzZCcGr36yJZADCq4Hc9dlWB93mlZBdDY3MXVZAQZD"
+// var url = `https://streaming-graph.facebook.com/${id}/live_comments?access_token=${access_token}&comment_rate=one_per_two_seconds&fields=from{name,id},message`
 // var source = new EventSource(url);
 
 // source.onmessage = function(event) {
-//   console.log(event)
+//  Json.parse(event.data)
 // };
+
 import { store } from '../components/store';
 import { home } from '../components/home';
 import { newproduct } from '../components/newproduct';

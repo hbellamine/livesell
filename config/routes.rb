@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     end
   end
   get 'my_livecasts', to: 'livecasts#mylivecasts' , as: 'usermylivecasts'
+  resources :orders, only: [:show, :create]
 
 end
 

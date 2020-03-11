@@ -1,5 +1,6 @@
 <div class="container d-flex justify-content-between">
 <div id="fb-root"></div>
+<% i = 0 %>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v6.0&appId=<%=ENV["FB_ID"]%>&autoLogAppEvents=1"></script>
 
           <div class="d-flex" style="margin-top: 10px;">
@@ -25,95 +26,125 @@
     <div id="grid-2" style="background-color:white;margin-top: 50px;">
         <% @selection.each do |selection| %>
           <% product = Product.find(selection.product_id) %>
-        <div class="product">
-          <div class="info-large">
-            <h4><%=product.description%></h4>
+        <%= form_tag orders_path do %>
+          <div class="product">
+            <div class="info-large">
+              <h4><%=product.description%></h4>
 
-            <div class="price-big">
-              <span><%=product.price%>$</span>
-            </div>
-
-            <h3>COLORS</h3>
-            <div class="colors-large">
-              <ul>
-                <li><%= product.colors%><span></span></a></li>
-              </ul>
-            </div>
-
-            <h3>SIZE</h3>
-            <div class="sizes-large">
-              <span><%product.sizes.each do |size|%>
-                    <%=size.name %>
-                    <%end%>
-              </span>
-            </div>
-
-            <button class="add-cart-large">Add To Selection</button>
-
-          </div>
-          <div class="make3D">
-            <div class="product-front">
-              <div class="shadow"></div>`
-              <% if product.pictures.attachments.present? %>
-              <%= cl_image_tag product.pictures[0].key %>
-              <% end %>
-              <div class="image_overlay"></div>
-
-                <div class= "add_to_cart"><%= link_to "Buy now",livecast_path(@livecast), style: "text-decoration: none; color: white;" %></div>
-
-              <div class="view_gallery">View gallery</div>
-              <div class="stats">
-                <div class="stats-container">
-                  <span class="product_price"><%=product.price%></span>
-                  <span class="product_name"><%=product.description%></span>
-
-
-                  <div class="product-options">
-
-                    <% if product.kind == 'Clothes' %>
-                      <strong>SIZES Available</strong>
-                      <span><%product.sizes.each do |size|%>
-                      <%= size.name %>
-                      <% productsize = ProductSize.where(product_id: product.id , size_id: size.id)%>
-                      <%= productsize[0].quantity %>
-                      <%end%>
-                      </span>
-                    <%elsif product.kind == 'Shoes' %>
-                      <strong>SIZES Available</strong>
-                      <span><%product.shoesizes.each do |shoesize|%>
-                      <%= shoesize.name %>
-                      <% productshoesize = ProductShoesize.where(product_id: product.id , shoesize_id: shoesize.id)%>
-                      <%= productshoesize[0].quantity %>
-                      <%end%>
-                      </span>
-                    <%end%>
-
-
-                  <% if product.kind != 'Clothes' and product.kind != 'Shoes' %>
-                    <strong>COLORS</strong>
-                    <div class="colors">
-                       <span><%product.colors.each do |color|%>
-                      <%= color.name %>
-                      <% productcolor = ProductColor.where(product_id: product.id , color_id: color.id)%>
-                      <%= productcolor[0].quantity %>
-                      <%end%>
-                      </span>
-                    </div>
-                   <%end%>
-
-                  </div>
-                </div>
+              <div class="price-big">
+                <span><%= humanized_money_with_symbol(product.price) %></span>
               </div>
-            </div>
 
-            <div class="product-back">
+              <h3>COLORS</h3>
+              <div class="colors-large">
+                <ul>
+                  <li><%= product.colors%><span></span></a></li>
+                </ul>
+              </div>
+
+              <h3>SIZE</h3>
+              <div class="sizes-large">
+                <span><%product.sizes.each do |size|%>
+                  <%=size.name %>
+                  <%end%>
+                </span>
+              </div>
+
+              <button class="add-cart-large">Add To Selection</button>
+
+            </div>
+            <div class="make3D">
+              <div class="product-front">
+                <div class="shadow"></div>`
+                <% if product.pictures.attachments.present? %>
+                <%= cl_image_tag product.pictures[0].key %>
+                <% end %>
+                <div class="image_overlay"></div>
+
+                <%= hidden_field_tag 'product_id', product.id %>
+                <!-- Need to allow the customer to choose the size or color before buying  -->
+                <!-- Need to add a hidden_field with the (size or color ) depeding on the product.kind choosed  -->
+
+
+                <div class= "add_to_cart"><%= submit_tag 'Buy now', style: "text-decoration: none; color: white;" %></div>
+                <div class="view_gallery">View gallery</div>
+                <div class="stats">
+                  <div class="stats-container">
+                    <span class="product_price"><%= humanized_money_with_symbol(product.price) %></span>
+                    <span class="product_name"><%=product.description%></span>
+
+
+                    <div class="product-options">
+
+                      <% if product.kind == 'Clothes' %>
+                      <strong>SIZES Available</strong>
+
+                      <span><%product.sizes.each do |size|%>
+
+                        <div class="custom-control custom-radio">
+                          <input type="radio" class="custom-control-input" id="defaultChecked<%=i%>" name="product[size]" value="<%= size.id %>">
+                          <label class="custom-control-label" for="defaultChecked<%=i%>">Size :<%= size.name %></label>
+                        </div>
+                        <% i+=1 %>
+
+                        <% productsize = ProductSize.where(product_id: product.id , size_id: size.id)%>
+                        <% if @livecast.user_id == current_user.id %>
+                        Qty left : <%= productsize[0].quantity %>
+                        <%end%> <br>
+                        <%end%>
+                      </span>
+                      <%elsif product.kind == 'Shoes' %>
+                      <strong>SIZES Available</strong>
+
+                      <span><%product.shoesizes.each do |shoesize|%>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" class="custom-control-input" id="defaultChecked<%=i%>" name="product[size]" value="<%= shoesize.id %>">
+                          <label class="custom-control-label" for="defaultChecked<%=i%>">Size :<%= shoesize.name %></label>
+                        </div>
+                        <% i+=1 %>
+
+                        <% productshoesize = ProductShoesize.where(product_id: product.id , shoesize_id: shoesize.id)%>
+                        <% if @livecast.user_id == current_user.id %>
+                        Qty left : <%= productshoesize[0].quantity %>
+                        <%end%> <br>
+                        <%end%>
+                      </span>
+                      <%end%>
+
+
+                      <% if product.kind != 'Clothes' and product.kind != 'Shoes' %>
+                      <strong>COLORS</strong>
+                      <div class="colors">
+                       <span><%product.colors.each do |color|%>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" class="custom-control-input" id="defaultChecked<%=i%>" name="product[size]" value="<%= color.id %>">
+                          <label class="custom-control-label" for="defaultChecked<%=i%>">Color :<%= color.name %></label>
+                        </div>
+                        <% i+=1 %>
+
+                         Color: <%= color.name %>
+                         <% productcolor = ProductColor.where(product_id: product.id , color_id: color.id)%>
+                         <% if @livecast.user_id == current_user.id %>
+                         Qty left : <%= productcolor[0].quantity %>
+                         <%end%> <br>
+                         <%end%>
+                       </span>
+                     </div>
+                     <%end%>
+
+                   </div>
+                 </div>
+               </div>
+             </div>
+
+             <div class="product-back">
               <div class="shadow"></div>
               <div class="carousel">
                 <ul class="carousel-container">
                   <% if product.pictures.attachments.present? %>
-                    <% product.pictures.each do |picture| %>
-                      <li><%= cl_image_tag picture.key %></li>
-                    <%end%>
+                  <% product.pictures.each do |picture| %>
+                  <li><%= cl_image_tag picture.key %></li>
+                  <%end%>
                   <% end %>
                 </ul>
                 <div class="arrows-perspective">
@@ -132,11 +163,12 @@
                 <div class="cx"></div>
               </div>
             </div>
+            <%end%>
           </div>
         </div>
 
-     <%end%>
-  </div>
+        <%end%>
+      </div>
 
     </div>
 

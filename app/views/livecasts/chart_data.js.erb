@@ -1,0 +1,6 @@
+function refreshChart(innerHTML) {
+  const chartWrapper = document.getElementById('chartearning');
+  chartWrapper.innerHTML = innerHTML;
+}
+
+refreshChart('<%= j render "shared/chart", livecast: @livecast %>');

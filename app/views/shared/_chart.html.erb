@@ -1,16 +1,1 @@
-
-<% sta = (Time.now)-2*60*60 %>
-<% pa = 10*60 %>
-<%= column_chart [[sta.strftime("%H:%M"), 0],
-[(sta+pa).strftime("%H:%M"), 100],
-[(sta+2*pa).strftime("%H:%M"), 120],
-[(sta+3*pa).strftime("%H:%M"), 150],
-[(sta+4*pa).strftime("%H:%M"), 200],
-[(sta+5*pa).strftime("%H:%M"), 250],
-[(sta+6*pa).strftime("%H:%M"), 280],
-[(sta+7*pa).strftime("%H:%M"), 320],
-[(sta+8*pa).strftime("%H:%M"), 350],
-[(sta+9*pa).strftime("%H:%M"), 400],
-[(sta+10*pa).strftime("%H:%M"), 410],
-[(sta+11*pa).strftime("%H:%M"), 420],
-[(sta+12*pa).strftime("%H:%M"), 420]] %>
+<%= line_chart [[Time.now.strftime("%H:%M"), @livecast.earning]] %>

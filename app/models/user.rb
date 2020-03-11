@@ -5,8 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   devise :omniauthable, omniauth_providers: [:facebook]
   has_many :messages, dependent: :destroy
-
-
+  has_many :orders
   has_one :store
   has_many :livecasts
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_10_152033) do
+ActiveRecord::Schema.define(version: 2020_03_11_181101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,15 +34,6 @@ ActiveRecord::Schema.define(version: 2020_03_10_152033) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
-  end
-
-  create_table "buyings", force: :cascade do |t|
-    t.bigint "order_id"
-    t.bigint "product_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["order_id"], name: "index_buyings_on_order_id"
-    t.index ["product_id"], name: "index_buyings_on_product_id"
   end
 
   create_table "chat_rooms", force: :cascade do |t|
@@ -73,6 +64,7 @@ ActiveRecord::Schema.define(version: 2020_03_10_152033) do
     t.datetime "updated_at", null: false
     t.integer "mode", default: 0
     t.boolean "confirmed", default: false
+    t.integer "earning", default: 0
     t.index ["store_id"], name: "index_livecasts_on_store_id"
     t.index ["user_id"], name: "index_livecasts_on_user_id"
   end
@@ -88,11 +80,18 @@ ActiveRecord::Schema.define(version: 2020_03_10_152033) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.bigint "user_id"
     t.string "state"
-    t.integer "totalprice"
+    t.string "product_sku"
+    t.integer "amount_cents", default: 0, null: false
+    t.string "amount_currency", default: "EUR", null: false
+    t.string "checkout_session_id"
+    t.bigint "user_id"
+    t.bigint "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "livecast_id"
+    t.index ["livecast_id"], name: "index_orders_on_livecast_id"
+    t.index ["product_id"], name: "index_orders_on_product_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -102,6 +101,7 @@ ActiveRecord::Schema.define(version: 2020_03_10_152033) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "quantity", default: 1
+    t.string "sku", default: "def"
     t.index ["color_id"], name: "index_product_colors_on_color_id"
     t.index ["product_id"], name: "index_product_colors_on_product_id"
   end
@@ -112,6 +112,7 @@ ActiveRecord::Schema.define(version: 2020_03_10_152033) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "quantity", default: 1
+    t.string "sku", default: "def"
     t.index ["product_id"], name: "index_product_shoesizes_on_product_id"
     t.index ["shoesize_id"], name: "index_product_shoesizes_on_shoesize_id"
   end
@@ -122,6 +123,7 @@ ActiveRecord::Schema.define(version: 2020_03_10_152033) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "quantity", default: 1
+    t.string "sku", default: "def"
     t.index ["product_id"], name: "index_product_sizes_on_product_id"
     t.index ["size_id"], name: "index_product_sizes_on_size_id"
   end
@@ -134,6 +136,7 @@ ActiveRecord::Schema.define(version: 2020_03_10_152033) do
     t.string "pictures"
     t.string "description"
     t.string "kind"
+    t.integer "price_cents", default: 0, null: false
     t.index ["store_id"], name: "index_products_on_store_id"
   end
 
@@ -190,18 +193,19 @@ ActiveRecord::Schema.define(version: 2020_03_10_152033) do
     t.string "avatar_url"
     t.string "provider"
     t.string "uid"
+    t.string "deliveryaddress", default: "todef"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "buyings", "orders"
-  add_foreign_key "buyings", "products"
   add_foreign_key "chat_rooms", "livecasts"
   add_foreign_key "livecasts", "stores"
   add_foreign_key "livecasts", "users"
   add_foreign_key "messages", "chat_rooms"
   add_foreign_key "messages", "users"
+  add_foreign_key "orders", "livecasts"
+  add_foreign_key "orders", "products"
   add_foreign_key "orders", "users"
   add_foreign_key "product_colors", "colors"
   add_foreign_key "product_colors", "products"

@@ -1,8 +1,9 @@
 class ProductShoesizesController < ApplicationController
   def update
     @product_shoesize = ProductShoesize.find(params[:id])
+
+    @product_shoesize.sku = `#{@product_shoesize.product.id} - #{@product_shoesize.size}`
     store = @product_shoesize.product.store
-    raise
     if @product_shoesize.update(product_shoesize_params)
       redirect_to store_path(store)
     else

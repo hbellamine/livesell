@@ -1,35 +1,40 @@
+<div class="row">
+  <div class="col-sm-12">
+    <% @livecasts.each do |livecast| %>
 
- <% @livecasts.each do |livecast| %>
-    <div class="card-product">
-      <%= cl_image_tag livecast.picture.attachment.key, height: 300, width: 400, crop: :fill, class: "img-rounded" %>
+        <div class="profile profile-smallimg">
+          <div class="profile__image"><%= cl_image_tag livecast.picture.attachment.key, height: 300, width: 400, crop: :fill, class: "img-rounded" %></div>
 
-      <div class="card-product-infos">
-        <h3><%= livecast.title %></h3>
-        <h2 style="font-size: 16px;">From: <%= livecast.date %></h2>
-        <h2>At: <%= livecast.start_time %><h2>
-        <h2>N°-Selected products: <h2 style="color:red;"><%#= Selection.where(livecast: livecast).count %></h2>
-      </div>
+                   <div class="profile__info">
+                      <h3 id="Titlecard"><%= livecast.title %></h3>
+                      <p class="Descriptioncard">From: <%= livecast.date %></p>
+                      <p>At: <%= livecast.start_time.strftime("%H:%M") %><p>
+                      <p>N°-Selected products: <h2 style="color:red;"><%= Selection.where(livecast: livecast).count %></p>
+                  </div>
 
-      <div>
-        <%= simple_form_for (livecast) do |f| %>
-        <%= f.input :url %>
-        <%=f.submit%>
-        <%end%>
-      </div>
-
-      <div class="confirm-button">
-      <% livecast.store_id = @store.id %>
-
-          <%= link_to "Add products to this livecast", store_path(livecast.store, livecast: livecast.id) ,class: "btn btn-danger" %>
+                  <div>
+                    <%= simple_form_for (livecast) do |f| %>
+                    <%= f.input :url, label: "Paste your facebook live link here" %>
+                    <i class="fas fa-video"></i> <%=f.submit "Enter the live", class:"btn btn-danger"%>
+                    <%end%>
+                  </div>
 
 
-          <%= link_to livecast_path(livecast.id), method: :delete do%>
-            <h1>Delete</h1>
-        <%end%>
-         <%= link_to "Go live",livecast_path(livecast.id) %>
-      </div>
+                    <% livecast.store_id = @store.id %>
+                      <div class="profile__cta"><%= link_to store_path(livecast.store, livecast: livecast.id) ,class: "button" do %>
+                          <i class="fas fa-plus-circle"></i>Add products to your live sale
+                        <%end%>
+                      </div>
+                      <% link_to livecast_path(livecast.id), method: :delete do%>
+                        <h1>Delete</h1>
+                      <%end%>
+                      <% link_to "Go live",livecast_path(livecast.id) %>
+                  </div>
 
-      </div>
-<%end%>
+          </div>
+      <%end%>
+  </div>
+</div>
+
 
 

@@ -5,8 +5,8 @@ JSResult
 
 #wrapper{
     overflow: hidden;
-    height: 500vh;
-    width: 1100px;
+    height: 100%;
+    width: 100%;
     background:#fff;
 }
 #header{
@@ -233,9 +233,10 @@ JSResult
 .product{
     position: relative;
     perspective: 800px;
-    width:306px;
-    height:471px;
-    margin: 60px;
+    width:260px;
+    height:350px;
+    margin: 40px;
+    margin-top: 30px;
     transform-style: preserve-3d;
     transition: transform 5s;
     float:left;
@@ -248,8 +249,8 @@ JSResult
 }
 .product-front img{width:100%;}
 .product-front, .product-back{
-    width:315px;
-    height:480px;
+    width:260px;
+    height:350px;
     background:#fff;
     position:absolute;
     left:-5px;
@@ -274,8 +275,8 @@ div.large .product-back{
             transition: all 100ms ease-out;
 }
 .make3D{
-    width:305px;
-    height:470px;
+    width:260px;
+    height:350px;
     position:absolute;
     top:10px;
     left:10px;
@@ -317,8 +318,8 @@ div.make3D.flip180{
 .make3D.animate{
     top:5px;
     left:5px;
-    width:315px;
-    height:480px;
+    width:260px;
+    height:360px;
     box-shadow:0px 5px 31px -1px rgba(0, 0, 0, 0.15);
     -webkit-transition:  100ms ease-out;
        -moz-transition:  100ms ease-out;
@@ -328,8 +329,8 @@ div.make3D.flip180{
 div.large .make3D{
     top:0;
     left:0;
-    width:315px;
-    height:480px;
+    width:260px;
+    height:360px;
     -webkit-transition:  300ms ease-out;
        -moz-transition:  300ms ease-out;
          -o-transition:  300ms ease-out;
@@ -342,16 +343,16 @@ div.large .make3D{
     position:absolute;
     top:382px;
     left:0;
-    width: 252px;
+    width: 260px;
     height: 300px;
-    padding: 24px 40px 35px 32px;
+    padding: 20px 40px 35px 32px;
     -webkit-transition: all 200ms ease-out;
        -moz-transition: all 200ms ease-out;
          -o-transition: all 200ms ease-out;
             transition: all 200ms ease-out;
 }
 .make3D.animate .stats-container{
-    top:265px;
+    top:100px;
     -webkit-transition: all 200ms ease-out;
        -moz-transition: all 200ms ease-out;
          -o-transition: all 200ms ease-out;
@@ -624,10 +625,10 @@ div.shadow{
     width: 110%;
 }
 .arrows-perspective{
-    width:315px;
+    width:230px;
     height:55px;
     position: absolute;
-    top: 218px;
+    top: 150px;
     transform-style: preserve-3d;
     transition: transform 5s;
     perspective: 335px;

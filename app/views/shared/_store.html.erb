@@ -16,126 +16,130 @@
     </div>
  <% end %>
 
-  <div id="grid">
-    <% @products.each do |product| %>
-        <div class="product">
-          <div class="info-large">
-            <h4><%=product.description%></h4>
 
-            <div class="price-big">
-              <span><%= humanized_money_with_symbol(product.price) %></span>
-            </div>
+  <div class="row">
+              <% @products.each do |product| %>
 
-            <h3>COLORS</h3>
-            <div class="colors-large">
-              <ul>
-                <li><%= product.colors%><span></span></a></li>
-              </ul>
-            </div>
+  <div class =" col-sm-12 col-lg-4">
+                    <div class="product">
+                      <div class="info-large">
+                        <h4><%=product.description%></h4>
 
-            <h3>SIZE</h3>
-            <div class="sizes-large">
-              <span><%product.sizes.each do |size|%>
-                    <%=size.name %>
-                    <%end%>
-              </span>
-            </div>
+                        <div class="price-big">
+                          <span><%= humanized_money_with_symbol(product.price) %></span>
+                        </div>
 
-            <button class="add-cart-large">Add To Selection</button>
+                        <h3>COLORS</h3>
+                        <div class="colors-large">
+                          <ul>
+                            <li><%= product.colors%><span></span></a></li>
+                          </ul>
+                        </div>
 
-          </div>
-          <div class="make3D">
-            <div class="product-front">
-              <div class="shadow"></div>`
-              <% if product.pictures.attachments.present? %>
-              <%= cl_image_tag product.pictures[0].key %>
-              <% end %>
-              <div class="image_overlay"></div>
-              <% if @selection != nil %>
-                <div class= "add_to_cart"><%= link_to "Add to selection",livecast_product_selection_path(params[:livecast],product.id), style: "text-decoration: none; color: white;" %></div>
-              <% end %>
-              <div class="view_gallery">View gallery</div>
-              <div class="stats">
-                <div class="stats-container">
-                  <span class="product_price"><%= humanized_money_with_symbol(product.price) %></span>
-                  <span class="product_name"><%=product.description%></span>
+                        <h3>SIZE</h3>
+                        <div class="sizes-large">
+                          <span><%product.sizes.each do |size|%>
+                                <%=size.name %>
+                                <%end%>
+                          </span>
+                        </div>
 
+                        <button class="add-cart-large">Add To Selection</button>
 
-                  <div class="product-options">
-
-                    <% if product.kind == 'Clothes' %>
-                      <strong>SIZES Available</strong>
-                      <span><%product.sizes.each do |size|%>
-                      <%= size.name %>
-                      <% productsize = ProductSize.where(product_id: product.id , size_id: size.id)%>
-                      <%= productsize[0].quantity %>
-                      <%end%>
-                      </span>
-                    <%elsif product.kind == 'Shoes' %>
-                      <strong>SIZES Available</strong>
-                      <span><%product.shoesizes.each do |shoesize|%>
-                      <%= shoesize.name %>
-                      <% productshoesize = ProductShoesize.where(product_id: product.id , shoesize_id: shoesize.id)%>
-                      <%= productshoesize[0].quantity %>
-                      <%end%>
-                      </span>
-                    <%end%>
+                      </div>
+                      <div class="make3D">
+                        <div class="product-front">
+                          <div class="shadow"></div>`
+                          <% if product.pictures.attachments.present? %>
+                          <%= cl_image_tag product.pictures[0].key %>
+                          <% end %>
+                          <div class="image_overlay"></div>
+                          <% if @selection != nil %>
+                            <div class= "add_to_cart"><%= link_to "Add to selection",livecast_product_selection_path(params[:livecast],product.id), style: "text-decoration: none; color: white;" %></div>
+                          <% end %>
+                          <div class="view_gallery">View gallery</div>
+                          <div class="stats">
+                            <div class="stats-container">
+                              <span class="product_price"><%= humanized_money_with_symbol(product.price) %></span>
+                              <span class="product_name"><%=product.description%></span>
 
 
-                  <% if product.kind != 'Clothes' and product.kind != 'Shoes' %>
-                    <strong>COLORS</strong>
-                    <div class="colors">
-                       <span><%product.colors.each do |color|%>
-                      <%= color.name %>
-                      <% productcolor = ProductColor.where(product_id: product.id , color_id: color.id)%>
-                      <%= productcolor[0].quantity %>
-                      <%end%>
-                      </span>
+                              <div class="product-options">
+
+                                <% if product.kind == 'Clothes' %>
+                                  <strong>SIZES Available</strong>
+                                  <span><%product.sizes.each do |size|%>
+                                  <%= size.name %>
+                                  <% productsize = ProductSize.where(product_id: product.id , size_id: size.id)%>
+                                  <%= productsize[0].quantity %>
+                                  <%end%>
+                                  </span>
+                                <%elsif product.kind == 'Shoes' %>
+                                  <strong>SIZES Available</strong>
+                                  <span><%product.shoesizes.each do |shoesize|%>
+                                  <%= shoesize.name %>
+                                  <% productshoesize = ProductShoesize.where(product_id: product.id , shoesize_id: shoesize.id)%>
+                                  <%= productshoesize[0].quantity %>
+                                  <%end%>
+                                  </span>
+                                <%end%>
+
+
+                              <% if product.kind != 'Clothes' and product.kind != 'Shoes' %>
+                                <strong>COLORS</strong>
+                                <div class="colors">
+                                   <span><%product.colors.each do |color|%>
+                                  <%= color.name %>
+                                  <% productcolor = ProductColor.where(product_id: product.id , color_id: color.id)%>
+                                  <%= productcolor[0].quantity %>
+                                  <%end%>
+                                  </span>
+                                </div>
+                               <%end%>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="product-back">
+                          <div class="shadow"></div>
+                          <div class="carousel">
+                            <ul class="carousel-container">
+                              <% if product.pictures.attachments.present? %>
+                                <% product.pictures.each do |picture| %>
+                                  <li><%= cl_image_tag picture.key %></li>
+                                <%end%>
+                              <% end %>
+                            </ul>
+                            <div class="arrows-perspective">
+                              <div class="carouselPrev">
+                                <div class="y"></div>
+                                <div class="x"></div>
+                              </div>
+                              <div class="carouselNext">
+                                <div class="y"></div>
+                                <div class="x"></div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="flip-back">
+                            <div class="cy"></div>
+                            <div class="cx"></div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                   <%end%>
-
-                  </div>
-                </div>
+    </div>
+                 <%end%>
               </div>
-            </div>
-
-            <div class="product-back">
-              <div class="shadow"></div>
-              <div class="carousel">
-                <ul class="carousel-container">
-                  <% if product.pictures.attachments.present? %>
-                    <% product.pictures.each do |picture| %>
-                      <li><%= cl_image_tag picture.key %></li>
-                    <%end%>
-                  <% end %>
-                </ul>
-                <div class="arrows-perspective">
-                  <div class="carouselPrev">
-                    <div class="y"></div>
-                    <div class="x"></div>
-                  </div>
-                  <div class="carouselNext">
-                    <div class="y"></div>
-                    <div class="x"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="flip-back">
-                <div class="cy"></div>
-                <div class="cx"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-     <%end%>
   </div>
 
     </div>
 
   </div>
 
-</div>
+
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

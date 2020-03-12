@@ -419,7 +419,7 @@ li {
 .positions .pos-card {
   border-bottom: 1px solid #eee;
   cursor: pointer;
-  padding: 25px;
+  height: 120px;
   flex-basis: 100%;
   margin: auto;
   -webkit-transition: all 0.4s ease-in-out;
@@ -444,6 +444,7 @@ li {
 }
 .positions .title {
   margin-bottom: 5px;
+  text-align: center;
 }
 .positions .title.new:after {
   content: "New";
@@ -459,10 +460,11 @@ li {
 .positions .dept {
   color: #777;
   font-size: .8rem;
+  text-align: center;
 }
 .positions .date, .positions .refer {
   font-size: .8rem;
-  position: absolute;
+  //position: absolute;
   right: 0;
   top: 0;
   display: table;
@@ -473,8 +475,7 @@ li {
   transition: all 0.3s ease-in-out;
 }
 .positions .refer {
-  opacity: 0;
-  padding: 15px 20px;
+  padding: 10px 10px 10px 10px;
   border-radius: 3px;
   border: 1px solid #ddd;
   -webkit-transition: all 0.2s ease-in-out;

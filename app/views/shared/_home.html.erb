@@ -4,24 +4,24 @@
   <ul>
     <% i = 0 %>
 
-    <h1 style="box-shadow: 2px 2px 2px lightgray; background-color:rgb(247, 199, 103);color:rgb(102, 102, 102);"> Todays livecasts </h1>
+    <h1 style="box-shadow: 2px 2px 2px lightgray; background-color:#FF8080;color:white;border-top-right-radius: 5px;border-top-left-radius: 5px;"> Todays livecasts </h1>
       <% @livecasts.each do |livecast| %>
 
-        <% if (livecast.mode == "pub" and Date.today == livecast.date) %>
-
-            <li class="pos-card" >
-                      <div class="content">
+      <% if (livecast.mode == "pub" and Date.today == livecast.date) %>
+          <li class="pos-card" >
+                <div class="content">
                             <div class="title"><%= livecast.title %></div>
                             <div class="dept">From: <%= livecast.date %></div>
 
-                      <div class="date">At: <%= livecast.start_time.strftime("%H:%M") %></div>
+                            <div class="date">At: <%= livecast.start_time.strftime("%H:%M") %></div>
                     <% if livecast.confirmed == true %>
                         <div><%= link_to "Access to the live cast", livecast_path(livecast.id), class: "btn btn-primary refer", style:"color: white;" %></div>
                     <% else %>
                        <div><%= link_to "Not accessible yet", root_path , class: "btn btn-danger refer" %></div>
                     <%end%>
-                  </div>
-                  <ul class="desc" >
+                </div>
+
+              <ul class="desc" >
 
                     <h1>Product selection of the livecast</h1>
                     <p>Live ce soir les filles avec une surprise à la clé beaucoup de promo et liquidation au taquet !!!!</p>
@@ -33,8 +33,8 @@
 
                           <% i += 1 %>
 
-                          <li>
-                           <div class="cardproduct">
+                      <li>
+                        <div class="cardproduct">
                             <div>
                                    <div id="carouselExampleIndicators<%=i%>" class="carousel slide" data-ride="carousel" style="height:170px;width:200px;">
                                             <ol class="carousel-indicators">
@@ -89,13 +89,13 @@
 
                                     Price :<%= humanized_money_with_symbol(product.price) %>
                                   </div>
-                            </div>
-                            </li>
+                        </div>
+                      </li>
                     <%end%>
 
                     <li><%=livecast.category%></li>
-                  </ul>
-                </li>
+              </ul>
+          </li>
         <%end%>
       <%end%>
   </ul>
@@ -109,7 +109,7 @@
 <div class="container positions">
   <ul>
     <% i = 0 %>
-    <h1 style="box-shadow: 2px 2px 2px lightgray; background-color:rgb(211, 227, 255);color:rgb(102, 102, 102);"> Upcoming livecasts </h1>
+    <h1 style="box-shadow: 2px 2px 2px lightgray; background-color:#1AB8DC;color:white; border-top-right-radius: 5px;border-top-left-radius: 5px;"> Upcoming livecasts </h1>
       <% @livecasts.each do |livecast| %>
 
         <% if (livecast.mode == "pub" and Date.today < livecast.date) %>
@@ -117,8 +117,7 @@
                       <div class="content">
                             <div class="title"><%= livecast.title %></div>
                             <div class="dept">From: <%= livecast.date %></div>
-
-                      <div class="date">At: <%= livecast.start_time.strftime("%H:%M") %></div>
+                            <div class="date">At: <%= livecast.start_time.strftime("%H:%M") %></div>
                     <% if livecast.confirmed == true %>
                         <div><%= link_to "Access to the live cast", livecast_path(livecast.id), class: "btn btn-primary refer", style:"color: white;" %></div>
                     <% else %>

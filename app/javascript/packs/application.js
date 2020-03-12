@@ -1,7 +1,6 @@
 import "bootstrap";
 
-import Rails from '@rails/ujs';
-Rails.start();
+
 
 //https://www.facebook.com/118160454885294/videos/1039021306498134/
 //https://www.facebook.com/273690313255566/videos/874309673010737/
@@ -23,11 +22,13 @@ import { refreshChart } from '../components/earningchart';
 
 
 
-
-const livecastshow = document.querySelector('.livecasts.show')
+document.addEventListener("DOMContentLoaded", () => {
+ const livecastshow = document.querySelector('.livecasts.show')
 if (livecastshow) {
   refreshChart();
 }
+})
+
 
 const storesshow = document.querySelector('.stores.show')
 if (storesshow) {

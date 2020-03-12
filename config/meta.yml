@@ -1,0 +1,5 @@
+meta_product_name: "Mylivesales"
+meta_title: "Mylivesales - Live sales"
+meta_description: "Mylivesales is a liveselling marketplace were seller can organise livecast sessions and sell the products they want."
+meta_image: "cover.jpg" # should exist in `app/assets/images/`
+twitter_account: "@product_twitter_account"   # required for Twitter Cards

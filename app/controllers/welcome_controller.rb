@@ -3,5 +3,7 @@ class WelcomeController < ApplicationController
   def index
         @livecasts = Livecast.all
 
+        @showcontainer = true
+
   end
 end

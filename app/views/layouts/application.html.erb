@@ -51,7 +51,7 @@
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v6.0&appId=<%=ENV["FB_ID"]%>&autoLogAppEvents=1"></script>
 
-    <div class="container">
+  <div>
       <%= render 'shared/navbar' %>
       <%= render 'shared/flashes' %>
       <%= yield %>
@@ -60,9 +60,7 @@
 
       <%= yield :after_js %>
 
-    </div>
-
-
+</div>
   </body>
 <%= render 'shared/footer' %>
 </html>

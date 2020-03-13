@@ -2,12 +2,12 @@
     <div class="row">
 
           <div class="col-sm-12">
-
-              <div id="fb-root"></div>
-              <% i = 0 %>
-              <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v6.0&appId=<%=ENV["FB_ID"]%>&autoLogAppEvents=1"></script>
-              <div class="fb-video" data-href="<%= @livecast.url %>" data-width="400" data-height="500" data-show-text="false">
-
+              <div class="fb-video-container">
+                <div id="fb-root"></div>
+                <% i = 0 %>
+                <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v6.0&appId=<%=ENV["FB_ID"]%>&autoLogAppEvents=1"></script>
+                <div class="fb-video" data-href="<%= @livecast.url %>" data-width="400" data-height="500" data-show-text="false">
+                </div>
              </div>
           </div>
 
@@ -142,7 +142,7 @@
                                    </span>
                                  </div>
                                  <%end%>
-                                 <%= submit_tag 'Buy now', class:"btn btn-primary" %>
+                                 <%= submit_tag 'Buy now', class:"btn btn-primary btn-block" %>
 
                                </div>
                              </div>

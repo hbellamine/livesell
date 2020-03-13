@@ -10,14 +10,14 @@
       <% if (livecast.mode == "pub" and Date.today == livecast.date) %>
           <li class="pos-card" >
                 <div class="content">
-                            <div class="title"><%= livecast.title %></div>
+                            <div class="title"><strong><%= livecast.title %></strong></div>
                             <div class="dept">From: <%= livecast.date %></div>
 
                             <div class="date">At: <%= livecast.start_time.strftime("%H:%M") %></div>
                     <% if livecast.confirmed == true %>
-                        <div><%= link_to "Access to the live cast", livecast_path(livecast.id), class: "btn btn-primary refer", style:"color: white;" %></div>
+                      <div class="mt-1"><%= link_to "Access to the live cast", livecast_path(livecast.id), class: "btn btn-primary refer", style:"color: white;" %></div>
                     <% else %>
-                       <div><%= link_to "Not accessible yet", root_path , class: "btn btn-danger refer" %></div>
+                       <div class="text-danger text-center mt-1">Not accessible yet</div>
                     <%end%>
                 </div>
 

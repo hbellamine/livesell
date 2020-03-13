@@ -1,8 +1,11 @@
 <!-- app/views/payments/new.html.erb -->
 <div class="container">
- Confirm
-      <button id="pay" class="btn btn-primary" >Pay</button>
+      <button id="pay" class="btn btn-primary" style="display:none">Pay</button>
 
+<div style="height: 90vh">
+  <h1 style="font-size: 50px; margin-top: 50px"><i class="fa fa-spinner fa-spin"></i></h1>
+</div>
+<script src="https://js.stripe.com/v3/"></script>
 
       <script>
         const paymentButton = document.getElementById('pay');
@@ -22,4 +25,4 @@
     </div>
   </div>
 </div>
-<script src="https://js.stripe.com/v3/"></script>
+

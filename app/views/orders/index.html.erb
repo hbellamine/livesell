@@ -1,48 +1,51 @@
-<style>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
 
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
+    <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
 
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-</style>
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
 
-<% @livecasts.each do |livecast| %>
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+    </style>
+<div class="col-sm-12">
+    <% @livecasts.each do |livecast| %>
 
-<table>
-  <tr>
-    <th>Livecast date</th>
-    <th>Order id</th>
-    <th>Purchase date</th>
-    <th>Product purchased</th>
-    <th>Product price</th>
-    <th>Customer first name</th>
-    <th>Delivery adress</th>
-    <th>Delivered?</th>
-  </tr>
-<% orders = Order.where(livecast_id: livecast.id ,state: "paid") %>
+    <table>
+      <tr>
+<!--         <th>Livecast date</th>
+        <th>Order id</th> -->
+   <!--      <th>Purchase date</th> -->
+        <th>Product purchased</th>
+<!--         <th>Product price</th> -->
+        <th>Customer first name</th>
+        <th>Delivery adress</th>
+<!--         <th>Delivered?</th> -->
+      </tr>
+    <% orders = Order.where(livecast_id: livecast.id ,state: "paid") %>
 
-<% orders.each do |order| %>
-  <tr>
-    <td><%= livecast.updated_at%></td>
-    <td><%= order.id %></td>
-    <td><%= order.updated_at%></td>
-    <td><%= Product.find(order.product_id).description %> </td>
-    <td><%= Product.find(order.product_id).price_cents%></td>
-    <td><%= User.find(order.user_id).first_name%></td>
-    <td><%= User.find(order.user_id).deliveryaddress%></td>
-    <td><input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"></td>
-  </tr>
-<%end%>
-</table>
+    <% orders.each do |order| %>
+      <tr>
+<!--         <td><%#= livecast.updated_at%></td>
+        <td><%#= order.id %></td>
+        <td><%#= order.updated_at%></td> -->
+        <td><%= Product.find(order.product_id).description %> </td>
+ <!--        <td><%#= Product.find(order.product_id).price_cents%></td> -->
+        <td><%= User.find(order.user_id).first_name%></td>
+        <td><%= User.find(order.user_id).deliveryaddress%></td>
+   <!--      <td><input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"></td> -->
+      </tr>
+    <%end%>
+    </table>
+    <%end%>
+</div>
 
-<%end%>
+

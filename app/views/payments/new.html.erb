@@ -1,11 +1,9 @@
 <!-- app/views/payments/new.html.erb -->
 <div class="container">
- Make sure your delivery address is good.
-      <button id="pay" class="btn btn-primary" hidden="hidden">Pay</button>
+ Confirm
+      <button id="pay" class="btn btn-primary" >Pay</button>
 
 
-
-      <script src="https://js.stripe.com/v3/"></script>
       <script>
         const paymentButton = document.getElementById('pay');
         paymentButton.addEventListener('click', () => {
@@ -24,3 +22,4 @@
     </div>
   </div>
 </div>
+<script src="https://js.stripe.com/v3/"></script>

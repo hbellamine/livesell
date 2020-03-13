@@ -1,14 +1,13 @@
-<div class="createsession">
-    <%= simple_form_for (@livecast) do |f| %>
+<div class="createsession" style="text-align: center; margin-top: 20px;>
 
-        <%= image_tag("https://res.cloudinary.com/dnwnxu6xb/image/upload/v1583168428/young-asia-happy-lady-live-video-blog-vlogger-sales-clothes-online-e-commerce-shopping-shop_53255-543_eracxy.jpg") %>
-        <%= f.input :picture, as: :file %>
+    <%= simple_form_for (@livecast) do |f| %>
+        <%= f.input :picture, as: :file, :label=>"Livecast picture"  %>
         <%= f.input :title %>
         <%= f.input :date, :label=>"Live cast date" %>
         <%= f.input :start_time, :label=>"Starting time" %>
         <%= f.input :mode, collection: Livecast.modes.keys %>
 
         <%=f.collection_radio_buttons :category, [['Makeup', 'Makeup'] ,['Clothes', 'Clothes'],['Shoes', 'Shoes'],['Bags', 'Bags']],:first, :last%>
-        <%=f.submit%>
+        <br><%=f.submit 'Create livecast', :class => 'btn btn-primary btn-block'%>
   <%end%>
 </div>

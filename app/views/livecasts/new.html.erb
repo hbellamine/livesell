@@ -1,13 +1,14 @@
-<div class="createsession" style="text-align: center; margin-top: 20px;>
-
+<div class="createsession">
     <%= simple_form_for (@livecast) do |f| %>
-        <%= f.input :picture, as: :file, :label=>"Livecast picture"  %>
+
+
+        <%= f.input :picture, as: :file %>
         <%= f.input :title %>
         <%= f.input :date, :label=>"Live cast date" %>
         <%= f.input :start_time, :label=>"Starting time" %>
         <%= f.input :mode, collection: Livecast.modes.keys %>
 
         <%=f.collection_radio_buttons :category, [['Makeup', 'Makeup'] ,['Clothes', 'Clothes'],['Shoes', 'Shoes'],['Bags', 'Bags']],:first, :last%>
-        <br><%=f.submit 'Create livecast', :class => 'btn btn-primary btn-block'%>
+        <%=f.submit "Create session", class: "btn btn-primary btn-block"%>
   <%end%>
 </div>

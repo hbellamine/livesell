@@ -88,11 +88,9 @@ JSResult
 
 }
 #sidebar{
-    float:left;
+    text-align:center;
     background:#fff;
-    width:275px;
-    padding:13px 0 0 45px;
-    height:100vh;
+    padding:2px 0 0 2px;
     border-right:1px solid #eee;
 }
 #sidebar h3{
@@ -757,7 +755,7 @@ div.cart-icon-top{
 }
 div.cart-icon-bottom{
     background:#fff url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/cart.png") 0 -3px no-repeat;
-    margin:0;
+    margin-left:170px;
     width:21px;
     height:19px;
 }

@@ -30,7 +30,7 @@ class LivecastsController < ApplicationController
     if @livecast.save
       @chat_room = ChatRoom.new(livecast: @livecast, name: @livecast.title)
       @chat_room.save
-      redirect_to usermylivecasts_path, notice: "Livecast created"
+      redirect_to store_path(@livecast.store, livecast: @livecast.id), notice: "Livecast created"
     else
       p @livecast.errors.messages
       render :new

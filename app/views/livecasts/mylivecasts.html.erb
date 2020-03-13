@@ -3,6 +3,11 @@
     <% @livecasts.each do |livecast| %>
 
         <div class="profile profile-smallimg">
+        <div style="text-align: right; padding:10px;">
+                      <%= link_to livecast_path(livecast.id), method: :delete do%>
+                            <i class="fas fa-trash-alt"></i>
+                          <%end%>
+                      </div>
           <div class="profile__image"><%= cl_image_tag livecast.picture.attachment.key, height: 300, width: 400, crop: :fill, class: "img-rounded" %></div>
 
                    <div class="profile__info">
@@ -12,12 +17,21 @@
                       <p>N°-Selected products: <h2 style="color:red;"><%= Selection.where(livecast: livecast).count %></p>
                   </div>
 
-                  <div>
+
+
                     <%= simple_form_for (livecast) do |f| %>
                     <%= f.input :url, label: "Paste your facebook live link here" %>
-                    <i class="fas fa-video"></i> <%=f.submit "Enter the live", class:"btn btn-danger"%>
+
+                        <i class="fas fa-video"></i> <%=f.submit "Enter the live", class:"btn btn-danger"%>
+
+
+
+
                     <%end%>
-                  </div>
+
+
+
+
 
 
                     <% livecast.store_id = @store.id %>
@@ -25,9 +39,7 @@
                           <i class="fas fa-plus-circle"></i>Add products to your live sale
                         <%end%>
                       </div>
-                      <% link_to livecast_path(livecast.id), method: :delete do%>
-                        <h1>Delete</h1>
-                      <%end%>
+
                       <% link_to "Go live",livecast_path(livecast.id) %>
                   </div>
 

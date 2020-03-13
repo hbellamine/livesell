@@ -1,11 +1,15 @@
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
 <div id="wrapper">
+<div class="row">
   <% if @selection != nil %>
+ <div class="sticky">
+  <div class="col-sm-3">
+
     <div id="sidebar">
-      <div style="display: flex;">
+
         <div class="cart-icon-bottom"></div>
         <div> <h3>Add to selection</h3></div>
-      </div>
+
 
         <ul>
           <% @selection.each do |selection| %>
@@ -13,14 +17,19 @@
           <li><%= product.description %></li> <%= link_to "delete", livecast_product_destroyselection_path(:id => selection.id, :livecast_id => @livecast.id,:product_id => product.id),method: :delete %>
           <%end%>
         </ul>
+      </div>
     </div>
+  </div>
  <% end %>
 
 
-  <div class="row">
-              <% @products.each do |product| %>
 
-  <div class =" col-sm-12 col-lg-4">
+              <% @products.each do |product| %>
+           <% if @selection == nil %>
+            <div class =" col-sm-12 col-lg-4">
+          <% else%>
+           <div class =" col-sm-9 col-lg-3">
+            <%end%>
                     <div class="product">
                       <div class="info-large">
                         <h4><%=product.description%></h4>
@@ -54,9 +63,7 @@
                           <%= cl_image_tag product.pictures[0].key %>
                           <% end %>
                           <div class="image_overlay"></div>
-                          <% if @selection != nil %>
-                            <div class= "add_to_cart"><%= link_to "Add to selection",livecast_product_selection_path(params[:livecast],product.id), style: "text-decoration: none; color: white;" %></div>
-                          <% end %>
+
                           <div class="view_gallery">View gallery</div>
                           <div class="stats">
                             <div class="stats-container">
@@ -69,17 +76,18 @@
                                 <% if product.kind == 'Clothes' %>
                                   <strong>SIZES Available</strong>
                                   <span><%product.sizes.each do |size|%>
-                                  <%= size.name %>
+                                   Size : <%= size.name %>
                                   <% productsize = ProductSize.where(product_id: product.id , size_id: size.id)%>
-                                  <%= productsize[0].quantity %>
+                                  Qty left: <%= productsize[0].quantity %></br>
                                   <%end%>
+
                                   </span>
                                 <%elsif product.kind == 'Shoes' %>
                                   <strong>SIZES Available</strong>
                                   <span><%product.shoesizes.each do |shoesize|%>
-                                  <%= shoesize.name %>
+                                  Size :<%= shoesize.name %>
                                   <% productshoesize = ProductShoesize.where(product_id: product.id , shoesize_id: shoesize.id)%>
-                                  <%= productshoesize[0].quantity %>
+                                  Qty left:<%= productshoesize[0].quantity %></br>
                                   <%end%>
                                   </span>
                                 <%end%>
@@ -89,13 +97,17 @@
                                 <strong>COLORS</strong>
                                 <div class="colors">
                                    <span><%product.colors.each do |color|%>
-                                  <%= color.name %>
+                                  Color :<%= color.name %>
                                   <% productcolor = ProductColor.where(product_id: product.id , color_id: color.id)%>
-                                  <%= productcolor[0].quantity %>
+                                  Qty left:<%= productcolor[0].quantity %></br>
                                   <%end%>
                                   </span>
                                 </div>
                                <%end%>
+
+                          <% if @selection != nil %>
+                          <%= link_to "Add to selection",livecast_product_selection_path(params[:livecast],product.id), class: "btn btn-primary" %>
+                          <% end %>
 
                               </div>
                             </div>

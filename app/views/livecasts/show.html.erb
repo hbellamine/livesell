@@ -33,8 +33,8 @@
     </div>
 
     <% if current_user.id != @livecast.user_id %>
-    <h1 style="box-shadow: 2px 2px 2px lightgray; background-color:#FF8080;color:white;border-top-right-radius: 5px;border-top-left-radius: 5px;">Shop</h1>
-      <div class="row">
+    <h1 style=" background-color:#FF8080;color:white;border-top-right-radius: 5px;border-top-left-radius: 5px;margin-top:10px; margin-bottom: 0px;">Shop</h1>
+      <div class="row" style="background-color: white; margin:3px;">
 
         <% @selection.each do |selection| %>
          <div class =" col-sm-12 col-lg-3">

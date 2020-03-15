@@ -24,6 +24,8 @@
               <%=f.submit "Enter the live", class:"btn btn-danger"%>
             <%end%>
 
+            <%= social_share_button_tag('Share to Facebook', :url => livecast_path(livecast.id), desc: livecast.title) %>
+
             <% livecast.store_id = @store.id %>
             <div class="profile__cta">
               <%= link_to store_path(livecast.store, livecast: livecast.id) ,class: "button" do %>

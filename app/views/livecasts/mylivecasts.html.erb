@@ -10,7 +10,7 @@
           <div class="profile__image"><%= cl_image_tag livecast.picture.attachment.key, height: 300, width: 400, crop: :fill, class: "img-rounded" %></div>
 
           <div class="profile__info">
-              <h3 id="Titlecard"><%= livecast.title %></h3>
+              <h3 id="Titlecard" style="margin-top: 5px;"><%= livecast.title %></h3>
               <p class="Descriptioncard">From: <%= livecast.date %></p>
               <p>At: <%= livecast.start_time.strftime("%H:%M") %><p>
               <p>N°-Selected products: <h2 style="color:red;"><%= Selection.where(livecast: livecast).count %></p>
@@ -23,6 +23,8 @@
                 <i class="fas fa-video"></i>
               <%=f.submit "Enter the live", class:"btn btn-danger"%>
             <%end%>
+            <p>Share your livecast</p>
+            <%= social_share_button_tag('You can access to my livecast following this link', :url => livecast_path(livecast.id), desc: livecast.title) %>
 
             <% livecast.store_id = @store.id %>
             <div class="profile__cta">

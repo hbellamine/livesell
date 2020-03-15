@@ -13,3 +13,16 @@
 @import "components/index";
 @import "pages/index";
 
+$size: 30px;
+
+.social-share-button {
+  .ssb-icon {
+    margin-top: 5px;
+    margin-left: 10px;
+    background-size: $size $size;
+    height: $size;
+    width: $size;
+
+  }
+}
+

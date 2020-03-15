@@ -2,7 +2,7 @@
 //= require_tree .
 //= require chartkick
 //= require Chart.bundle
-//=require social-share-button
+//= require social-share-button
 
 
 

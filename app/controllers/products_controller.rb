@@ -35,7 +35,7 @@ class ProductsController < ApplicationController
     @product_colors = @product.product_colors
     @product_colors.each do |productcolor|
       sku = "#{productcolor.product_id}-#{productcolor.color_id}"
-      product_colors.update(sku: sku)
+      productcolor.update(sku: sku)
     end
 
   end

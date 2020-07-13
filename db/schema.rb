@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_11_181101) do
+ActiveRecord::Schema.define(version: 2020_07_13_183557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(version: 2020_03_11_181101) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "buyings", force: :cascade do |t|
+    t.bigint "order_id"
+    t.bigint "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_buyings_on_order_id"
+    t.index ["product_id"], name: "index_buyings_on_product_id"
   end
 
   create_table "chat_rooms", force: :cascade do |t|
@@ -199,6 +208,8 @@ ActiveRecord::Schema.define(version: 2020_03_11_181101) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "buyings", "orders"
+  add_foreign_key "buyings", "products"
   add_foreign_key "chat_rooms", "livecasts"
   add_foreign_key "livecasts", "stores"
   add_foreign_key "livecasts", "users"
